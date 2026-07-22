@@ -1,28 +1,40 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 
 const NAV_LINKS = [
-  { label: 'Work',        href: '#work',                          chevron: false },
-  { label: 'Services',    href: '#services',                      chevron: false },
-  { label: 'Process',     href: '#process',                       chevron: false },
-  { label: 'About',       href: '#about',                         chevron: false },
-  { label: 'Experience',  href: '#experience',                    chevron: false },
-  { label: 'Credentials', href: '#credentials',                   chevron: false },
-  { label: 'Reviews',     href: '#testimonials',                  chevron: false },
-  { label: 'Pricing',     href: 'https://cybersage.dev/pricing',  chevron: false },
+  { label: 'Home',     href: '/',         chevron: false },
+  { label: 'About',    href: '/about',    chevron: false },
+  { label: 'Products', href: '/products', chevron: false },
+  { label: 'Gallery',  href: '/gallery',  chevron: false },
+  { label: 'Contact',  href: '/contact',  chevron: false },
 ];
 
 const SPRING = { type: 'spring' as const, stiffness: 280, damping: 32, mass: 0.75 };
 
+function Logo() {
+  return (
+    <Link href="/" className="flex items-center gap-2.5 shrink-0 select-none no-underline">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-white" strokeWidth="2">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" className="opacity-30" />
+        <ellipse cx="12" cy="12" rx="10" ry="3.5" stroke="currentColor" strokeWidth="1.5" transform="rotate(-28 12 12)" />
+        <path d="M10 8v8M10 8h3a2.5 2.5 0 0 1 0 5h-3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <span className="font-black text-[0.88rem] tracking-[-0.03em] uppercase text-white font-sans">
+        Print <span className="font-light text-white/55">Planet</span>
+      </span>
+    </Link>
+  );
+}
+
 function NavLink({ label, href, chevron }: { label: string; href: string; chevron: boolean }) {
   return (
-    <a
+    <Link
       href={href}
-      className="flex items-center gap-1 px-2.5 py-2 rounded-full text-[0.62rem] font-medium tracking-wide uppercase hover:bg-white/8 transition-all duration-200 whitespace-nowrap"
+      className="flex items-center gap-1 px-2.5 py-2 rounded-full text-[0.62rem] font-medium tracking-wide uppercase hover:bg-white/8 transition-all duration-200 whitespace-nowrap no-underline"
       style={{ fontFamily: 'Satoshi, system-ui, sans-serif', color: '#D9D9D9', mixBlendMode: 'difference' }}
     >
       {label}
@@ -33,7 +45,7 @@ function NavLink({ label, href, chevron }: { label: string; href: string; chevro
           style={{ color: '#D9D9D9', mixBlendMode: 'difference', marginTop: '1px' }}
         />
       )}
-    </a>
+    </Link>
   );
 }
 
@@ -41,13 +53,13 @@ function HireBtn() {
   return (
     <button
       onClick={() => window.dispatchEvent(new CustomEvent('open-contact-modal'))}
-      className="group flex items-center bg-white rounded-full overflow-hidden hover:bg-white/80 transition-colors duration-200 shrink-0"
+      className="group flex items-center bg-white rounded-full overflow-hidden hover:bg-white/80 transition-colors duration-200 shrink-0 cursor-pointer"
     >
       <span
         className="pl-4 pr-1.5 py-1.75 text-black text-[0.61rem] font-medium tracking-[0.14em] uppercase whitespace-nowrap"
         style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
       >
-        Hire Me
+        Get Quote
       </span>
       <span className="w-7 h-7 flex items-center justify-center rounded-full bg-black/10 group-hover:bg-black/15 transition-colors mr-0.5 shrink-0">
         <ArrowRight size={11} className="text-black" />
@@ -60,6 +72,7 @@ function HireBtn() {
    ONE pill. Spring-animates its width between compact and expanded.
    No AnimatePresence. No fading. Just physical expansion.
    Glass contrast is HIGH at default (top), lighter when expanded (scrolled).
+   Sub-pages use static width, home page uses scrolling expand.
  ═══════════════════════════════════════════════════════════════════════════ */
 export function Navbar() {
   const [scrolled, setScrolled]   = useState(false);
@@ -70,7 +83,7 @@ export function Navbar() {
   useEffect(() => {
     const calc = () => {
       const padding = Math.min(Math.max(window.innerWidth * 0.04, 20), 80);
-      setExpandedW(Math.min(window.innerWidth - padding * 2, 980));
+      setExpandedW(Math.min(window.innerWidth - padding * 2, 860));
     };
     calc();
     window.addEventListener('resize', calc);
@@ -84,8 +97,8 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  /* Compact ≈ logo(160) + sep + 8 links(~580) + sep + CTA(~90) + padding ≈ 900 */
-  const COMPACT_W = 920;
+  /* Compact ≈ logo(150) + sep + 5 links(~250) + sep + CTA(~90) + padding ≈ 680 */
+  const COMPACT_W = 720;
   const targetW   = scrolled ? expandedW : COMPACT_W;
 
   return (
@@ -100,7 +113,7 @@ export function Navbar() {
         <motion.div
           animate={{ width: targetW }}
           transition={SPRING}
-          className="pointer-events-auto flex items-center rounded-full"
+          className="pointer-events-auto flex items-center rounded-full relative"
           style={{
             /* Glass: contrast by default, lighter on expand */
             backdropFilter:  scrolled ? 'blur(16px)' : 'blur(28px)',
@@ -111,28 +124,18 @@ export function Navbar() {
               ? '0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06)'
               : '0 8px 40px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.08)',
             transition: 'background-color 0.45s ease, backdrop-filter 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease',
-            padding: '6px 10px 6px 14px',
+            padding: '6px 10px 6px 16px',
             isolation: 'isolate',
           }}
         >
           {/* Logo — always left */}
-          <a href="#" className="flex items-center shrink-0 mr-3" aria-label="Cybersage">
-            <Image
-              src="/sage/sage_horiz1_white.png"
-              alt="Cybersage"
-              width={200}
-              height={50}
-              priority
-              className="block object-contain"
-              style={{ height: 46, width: 'auto' }}
-            />
-          </a>
+          <Logo />
 
           {/* Separator */}
-          <div className="h-5 w-px bg-white/12 shrink-0 mr-1" />
+          <div className="h-5 w-px bg-white/12 shrink-0 ml-4 mr-3" />
 
           {/* Nav links — always in the absolute center of the pill */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex items-center">
+          <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1.5">
             {NAV_LINKS.map((l) => <NavLink key={l.label} {...l} />)}
           </div>
 
@@ -153,8 +156,7 @@ export function Navbar() {
         <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-auto">
 
           {/* Logo pill */}
-          <a
-            href="#"
+          <div
             className="flex items-center rounded-full px-4 py-2.5"
             style={{
               backdropFilter: 'blur(28px)',
@@ -164,21 +166,13 @@ export function Navbar() {
               boxShadow: '0 6px 28px rgba(0,0,0,0.40)',
             }}
           >
-            <Image
-              src="/sage/sage_horiz1_white.png"
-              alt="Cybersage"
-              width={200}
-              height={50}
-              priority
-              className="block object-contain"
-              style={{ height: 38, width: 'auto' }}
-            />
-          </a>
+            <Logo />
+          </div>
 
           {/* Menu pill */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex items-center gap-2.5 rounded-full px-4 py-3"
+            className="flex items-center gap-2.5 rounded-full px-4 py-3 cursor-pointer"
             style={{
               backdropFilter: 'blur(28px)',
               WebkitBackdropFilter: 'blur(28px)',
@@ -230,23 +224,27 @@ export function Navbar() {
               </button>
 
               {NAV_LINKS.map((link, i) => (
-                <motion.a
+                <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + i * 0.06, duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex items-center justify-between border-b border-white/8 py-4"
+                  className="no-underline"
                 >
-                  <span
-                    className="font-black tracking-[-0.04em] text-white"
-                    style={{ fontFamily: 'Satoshi, system-ui, sans-serif', fontWeight: 800, fontSize: 'clamp(2rem, 8vw, 2.8rem)' }}
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + i * 0.06, duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex items-center justify-between border-b border-white/8 py-4"
                   >
-                    {link.label}
-                  </span>
-                  <ArrowRight size={18} className="text-white/20" />
-                </motion.a>
+                    <span
+                      className="font-black tracking-[-0.04em] text-white"
+                      style={{ fontFamily: 'Satoshi, system-ui, sans-serif', fontWeight: 800, fontSize: 'clamp(2rem, 8vw, 2.8rem)' }}
+                    >
+                      {link.label}
+                    </span>
+                    <ArrowRight size={18} className="text-white/20" />
+                  </motion.div>
+                </Link>
               ))}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -256,10 +254,10 @@ export function Navbar() {
               >
                 <button
                   onClick={() => { setMobileOpen(false); window.dispatchEvent(new CustomEvent('open-contact-modal')); }}
-                  className="flex items-center justify-center gap-2 bg-white text-black rounded-full py-4 w-full"
+                  className="flex items-center justify-center gap-2 bg-white text-black rounded-full py-4 w-full cursor-pointer"
                 >
                   <span className="text-[0.68rem] font-medium tracking-[0.18em] uppercase" style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}>
-                    Hire Me
+                    Get Quote
                   </span>
                   <span className="w-6 h-6 rounded-full bg-black/10 flex items-center justify-center">
                     <ArrowRight size={10} className="text-black" />

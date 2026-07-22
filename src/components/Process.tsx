@@ -9,31 +9,38 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const STEPS = [
   {
     index: '01',
-    title: 'Discovery',
-    duration: 'Days 1–3',
-    body: 'We start with the problem, not the tech. I map your goals, users, and constraints, then turn them into a scoped plan with clear deliverables — so you know exactly what you’re getting and when.',
-    tags: ['Goals', 'Scope', 'Timeline'],
+    title: 'Choose Product',
+    duration: 'Step 1',
+    body: 'Select your customized item, color, fabric/material, and quantity from our catalog. We print anything from a single customized gift item to a high-volume corporate uniform order.',
+    tags: ['Catalog', 'Apparel', 'Drinkware', 'Gift Items'],
   },
   {
     index: '02',
-    title: 'Architecture',
-    duration: 'Week 1',
-    body: 'I design the system before writing a line of production code — data models, API contracts, infrastructure, and security boundaries. The result is software that scales cleanly instead of collapsing under its own weight.',
-    tags: ['System Design', 'Data Models', 'Security'],
+    title: 'Submit Design',
+    duration: 'Step 2',
+    body: 'Upload your high-res design assets (PDF, SVG, PNG) via WhatsApp or email. Our team will verify image resolutions, color alignments, and dimensions for compatibility.',
+    tags: ['Vector Check', 'File Review', 'WhatsApp Support'],
   },
   {
     index: '03',
-    title: 'Build & Ship',
-    duration: 'Core sprint',
-    body: 'Tight, visible iterations. You see working software early and often, with weekly check-ins and a live staging URL. Momentum over perfection — high-impact features first, polished relentlessly.',
-    tags: ['Iterative', 'Weekly Demos', 'Staging'],
+    title: 'Approve Preview',
+    duration: 'Step 3',
+    body: 'We will generate a digital mockup proof of your customized product. You check the layout, spelling, and placement, then sign off with 100% confidence before printing starts.',
+    tags: ['Digital Proof', 'Visual Check', 'Sign-Off'],
   },
   {
     index: '04',
-    title: 'Launch & Support',
-    duration: 'Go-live +',
-    body: 'Zero-downtime deployment, performance tuning, and a hand-off you can actually maintain. I stay on after launch to monitor, fix, and extend — your platform keeps getting better, not stale.',
-    tags: ['Deploy', 'Monitoring', 'Handover'],
+    title: 'Precision Print',
+    duration: 'Step 4',
+    body: 'We route your order to our state-of-the-art production workshop using sublimation, screen printing, DTF transfer, or embroidery to deliver flawless, long-lasting custom items.',
+    tags: ['Sublimation', 'DTF Print', 'Embroidery', 'Screen Print'],
+  },
+  {
+    index: '05',
+    title: 'Direct Delivery',
+    duration: 'Step 5',
+    body: 'We run individual quality inspections, pack your prints securely, and ship them directly to your home, school, or corporate office with real-time tracking.',
+    tags: ['Quality Inspection', 'Secure Pack', 'Direct Shipping'],
   },
 ];
 
@@ -143,7 +150,7 @@ export function Process() {
             className="font-black text-white tracking-[-0.04em] leading-[0.9]"
             style={{ fontFamily: 'Satoshi, system-ui, sans-serif', fontWeight: 800, fontSize: 'clamp(2.6rem,6.5vw,7.5rem)' }}
           >
-            {(['How', 'I'] as const).map((word, i) => (
+            {(['How', 'It'] as const).map((word, i) => (
               <span key={word} className="inline-block overflow-hidden mr-[0.25em]">
                 <motion.span
                   className="block"
@@ -168,7 +175,7 @@ export function Process() {
                 animate={sectionInView ? { y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.28, ease: EASE }}
               >
-                Work
+                Works
               </motion.span>
             </span>
           </h2>
@@ -180,8 +187,7 @@ export function Process() {
             animate={sectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
           >
-            Hiring an architect shouldn’t feel like a gamble. Here’s the exact, predictable path
-            from first conversation to a launched, maintainable product — no disappearing acts.
+            Ordering customized merchandise shouldn’t feel like a guessing game. Here is our direct, transparent step-by-step workflow from first inquiry to final package delivery.
           </motion.p>
         </div>
 
@@ -200,24 +206,24 @@ export function Process() {
           className="mt-[clamp(2.5rem,5vw,4rem)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border border-white/10 bg-white/[0.02] p-[clamp(1.5rem,3vw,2.5rem)]"
         >
           <div className="flex items-center gap-3">
-            <span className="relative flex w-2 h-2">
+            <span className="relative flex w-2.5 h-2.5">
               <span className="absolute inset-0 rounded-full bg-emerald-400/40 animate-ping" />
-              <span className="w-2 h-2 rounded-full bg-emerald-400/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
             </span>
             <p
-              className="text-white/70"
+              className="text-white/70 animate-pulse"
               style={{ fontFamily: 'Satoshi, system-ui, sans-serif', fontSize: 'clamp(0.9rem,1.4vw,1.15rem)' }}
             >
-              Currently accepting new projects —{' '}
+              Accepting custom printing orders —{' '}
               <span style={{ fontFamily: 'var(--font-instrument), Georgia, serif', fontStyle: 'italic', color: 'rgba(255,255,255,0.55)' }}>
-                limited slots this quarter.
+                bulk corporate discounts available.
               </span>
             </p>
           </div>
           <button
             onClick={() => window.dispatchEvent(new CustomEvent('open-contact-modal'))}
             data-cursor="hire"
-            className="group inline-flex items-center gap-3 border border-white/20 px-7 py-3.5 text-white/65 hover:text-white hover:border-white/50 hover:bg-white/[0.04] transition-colors duration-300 shrink-0"
+            className="group inline-flex items-center gap-3 border border-white/20 px-7 py-3.5 text-white/65 hover:text-white hover:border-white/50 hover:bg-white/[0.04] transition-colors duration-300 shrink-0 cursor-pointer"
           >
             <span className="text-[0.62rem] tracking-[0.22em] uppercase font-medium" style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}>
               Start a Project

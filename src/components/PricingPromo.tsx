@@ -3,13 +3,14 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const TIERS = [
-  { label: 'Starter',       note: 'Single-scope delivery' },
-  { label: 'Professional',  note: 'Multi-service engagement' },
-  { label: 'Enterprise',    note: 'Full systems architecture' },
+  { label: 'Custom Gift Items', note: 'No minimum order quantity (MOQ)' },
+  { label: 'Bulk Apparel & Wear', note: 'Volume discounts starting at 10+ items' },
+  { label: 'Corporate Merch & Gifts', note: 'Fully managed custom order packs' },
 ];
 
 export function PricingPromo() {
@@ -34,7 +35,7 @@ export function PricingPromo() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, ease: EASE }}
           >
-            07 / Pricing
+            08 / Pricing
           </motion.span>
           <motion.div
             ref={lineRef}
@@ -105,9 +106,9 @@ export function PricingPromo() {
                 fontSize:   'clamp(1.05rem, 1.5vw, 1.3rem)',
               }}
             >
-              Every service tier, clearly priced — no discovery calls required to
-              understand what you&apos;re paying for. Scope your engagement, pick
-              the tier that fits, and get started the same week.
+              Every custom job, clearly budgeted — no hidden setup costs or surprise
+              charges. Request a rapid custom quote on the fly, pick the catalog category
+              that fits, and approve design mockups within 24 hours.
             </p>
 
             {/* Tier pills */}
@@ -152,18 +153,18 @@ export function PricingPromo() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.6, ease: EASE }}
             >
-              <a
-                href="https://cybersage.dev/pricing"
+              <Link
+                href="/contact"
                 data-cursor="view"
                 className="group flex items-center gap-2 bg-black text-white px-7 py-3.5 text-[0.68rem] font-medium tracking-[0.18em] uppercase hover:bg-black/80 transition-colors duration-200"
                 style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
               >
-                View All Tiers
+                Request a Quote
                 <ArrowUpRight
                   size={12}
                   className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
                 />
-              </a>
+              </Link>
               <span
                 className="text-black/30"
                 style={{
@@ -172,7 +173,7 @@ export function PricingPromo() {
                   letterSpacing: '0.06em',
                 }}
               >
-                cybersage.dev/pricing
+                printplanet.in/quote
               </span>
             </motion.div>
           </motion.div>

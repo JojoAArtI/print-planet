@@ -10,9 +10,9 @@ import Image from 'next/image';
 gsap.registerPlugin(ScrollTrigger);
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const AUTOPLAY_MS = 7000;
+const AUTOPLAY_MS = 7500;
 
-type Source = 'Client' | 'LinkedIn' | 'Upwork';
+type Source = 'Client' | 'Google' | 'WhatsApp';
 
 interface Testimonial {
   name: string;
@@ -20,72 +20,42 @@ interface Testimonial {
   company: string;
   quote: string;
   image: string;
-  /** White company logo in /public/logo — omitted for peer endorsements */
   logo?: string;
-  /** Scale-up factor for logos with heavy internal whitespace */
-  logoScale?: number;
   source: Source;
 }
 
-/* Real testimonials — quotes transcribed from the source screenshots in /public/testimonial */
 const TESTIMONIALS: Testimonial[] = [
   {
-    name: 'Hycinth',
-    role: 'Chief Executive Officer',
-    company: 'SAMDUS Oil & Gas',
-    quote:
-      'It has been quite a pleasure and delightful experience working with you. Your professionalism, dedication, commitment, enthusiasm, passion, and especially patience are all commendable.',
-    image: '/testimonial/samdus.jpg',
-    logo: '/logo/samdus_white.png',
+    name: 'Panina',
+    role: 'Student Athlete',
+    company: 'Varsity Football',
+    quote: 'I always wanted to play professionally and I am so happy to see this clear, crisp, and durable print on my t-shirt.',
+    image: '/testimonial/panina.jpg',
     source: 'Client',
   },
   {
-    name: 'Carita',
-    role: 'Founder',
-    company: 'RecoverDerm',
-    quote:
-      'The website is beautiful — already I’m getting a lot of compliments. I’m happy and proud we were able to bring my vision to light.',
-    image: '/testimonial/recoverderm.jpg',
-    logo: '/logo/ReCoverDerm Logo Varient (White).png',
+    name: 'Bhardwaj',
+    role: 'Team Leader',
+    company: 'Tech Solutions Ltd.',
+    quote: 'Great service, quick delivery, and a simple order process. These guys are going to go places, mark my words!',
+    image: '/testimonial/bhardwaj.jpg',
     source: 'Client',
   },
   {
-    name: 'Halima',
-    role: 'Executive Director',
-    company: 'AmaniGo Travel',
-    quote:
-      'Cybersage delivered a top-notch CMS for our travel agency. It’s user-friendly and has genuinely enhanced our client engagement.',
-    image: '/testimonial/amanigo.png',
-    logo: '/logo/amanigo.png',
-    logoScale: 2,
+    name: 'Rajesh M.',
+    role: 'Procurement Officer',
+    company: 'Capital Corp',
+    quote: 'Ordered 250 polo shirts and printed lanyards for our annual conference. Print quality was immaculate and uniform fabric is very breathable.',
+    image: '/testimonial/rajesh.jpg',
     source: 'Client',
   },
   {
-    name: 'Godspower Lawrence',
-    role: 'Software Engineer',
-    company: 'Endorsement · LinkedIn',
-    quote:
-      'I was consistently impressed by his exceptional Python skills, dedication, and attention to detail. He excels at solving complex problems with a systematic approach and collaborates effectively within a team. He is an asset to any team.',
-    image: '/testimonial/lawerence_linkedin.jpg',
-    source: 'LinkedIn',
-  },
-  {
-    name: 'Precious Ukasoanya',
-    role: 'Fullstack Software Engineer',
-    company: 'Endorsement · LinkedIn',
-    quote:
-      'Carrington possesses an in-depth understanding of Python, consistently delivering high-quality code with a keen eye for detail. A great team player who communicates effectively — I wholeheartedly endorse him.',
-    image: '/testimonial/preciousLinkedIn.jpg',
-    source: 'LinkedIn',
-  },
-  {
-    name: 'Ashley J.',
-    role: 'Software Engineer',
-    company: 'Verified · Upwork',
-    quote:
-      'He consistently delivered quality work on time, communicated effectively, and demonstrated strong technical skills in Python. Professional, reliable, and easy to work with. Highly recommended.',
-    image: '/testimonial/ashley_upwork.jpg',
-    source: 'Upwork',
+    name: 'Aisha B.',
+    role: 'Creative Director',
+    company: 'Studio Bloom',
+    quote: 'Their customized photo frames and water bottles are perfect corporate gift hampers. Sublimation print on the mugs is flawless and dishwasher safe.',
+    image: '/testimonial/aisha.jpg',
+    source: 'Client',
   },
 ];
 
@@ -95,8 +65,8 @@ function SourceBadge({ source }: { source: Source }) {
       className="inline-flex items-center gap-1.5 border border-white/12 px-2.5 py-1 text-[0.5rem] tracking-[0.2em] uppercase text-white/35 font-medium"
       style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
     >
-      <span className="w-1 h-1 rounded-full bg-white/40" />
-      {source === 'Client' ? 'Verified Client' : `via ${source}`}
+      <span className="w-1 h-1 rounded-full bg-emerald-400" />
+      {source === 'Client' ? 'Verified Order' : `via ${source}`}
     </span>
   );
 }
@@ -181,7 +151,7 @@ export function Testimonials() {
             animate={sectionInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, ease: EASE }}
           >
-            07 / Testimonials
+            06 / Testimonials
           </motion.span>
           <motion.div
             className="flex-1 h-px bg-white/10"
@@ -225,7 +195,7 @@ export function Testimonials() {
               animate={sectionInView ? { y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.28, ease: EASE }}
             >
-              clients &amp; peers
+              our customers
             </motion.span>
           </span>
         </h2>
@@ -238,7 +208,7 @@ export function Testimonials() {
           className="grid grid-cols-1 lg:grid-cols-[1fr_0.85fr] gap-[clamp(2.5rem,5vw,5rem)] items-center border-t border-white/8 pt-[clamp(2.5rem,5vw,4.5rem)]"
         >
           {/* ── LEFT: write-up ─────────────────────────────────────────────── */}
-          <div className="relative min-h-[clamp(22rem,40vw,26rem)] flex flex-col justify-between order-2 lg:order-1">
+          <div className="relative min-h-[clamp(20rem,35vw,24rem)] flex flex-col justify-between order-2 lg:order-1">
             {/* index */}
             <div className="flex items-center gap-4 mb-8">
               <span
@@ -277,20 +247,7 @@ export function Testimonials() {
                 </blockquote>
 
                 <div className="mt-9 flex items-center gap-5">
-                  {/* company logo OR source badge slot */}
-                  {t.logo ? (
-                    <div className="relative h-12 w-32 shrink-0 opacity-80">
-                      <Image
-                        src={t.logo}
-                        alt={t.company}
-                        fill
-                        className="object-contain object-left"
-                        style={t.logoScale ? { transform: `scale(${t.logoScale})`, transformOrigin: 'left center' } : undefined}
-                      />
-                    </div>
-                  ) : null}
-
-                  <div className={t.logo ? 'border-l border-white/12 pl-5' : ''}>
+                  <div className="border-white/12">
                     <p
                       className="text-white font-semibold"
                       style={{ fontFamily: 'Satoshi, system-ui, sans-serif', fontSize: 'clamp(0.95rem,1.4vw,1.1rem)' }}
@@ -301,7 +258,7 @@ export function Testimonials() {
                       className="text-white/40 mt-0.5"
                       style={{ fontFamily: 'Satoshi, system-ui, sans-serif', fontSize: '0.78rem' }}
                     >
-                      {t.role}{t.logo ? ` · ${t.company}` : ''}
+                      {t.role} · {t.company}
                     </p>
                   </div>
                 </div>
@@ -334,13 +291,13 @@ export function Testimonials() {
                     <button
                       key={item.name}
                       onClick={() => go(i, i > active ? 1 : -1)}
-                      className="text-[0.6rem] tracking-[0.16em] uppercase font-medium transition-colors duration-200"
+                      className="text-[0.6rem] tracking-[0.16em] uppercase font-medium transition-colors duration-200 cursor-pointer"
                       style={{
                         fontFamily: 'Satoshi, system-ui, sans-serif',
                         color: i === active ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.25)',
                       }}
                     >
-                      {item.name.split(' ')[0]}
+                      {item.name}
                     </button>
                   ))}
                 </div>
@@ -350,14 +307,14 @@ export function Testimonials() {
                   <button
                     onClick={prev}
                     aria-label="Previous testimonial"
-                    className="w-10 h-10 border border-white/12 flex items-center justify-center text-white/35 hover:text-white hover:border-white/35 transition-colors duration-200"
+                    className="w-10 h-10 border border-white/12 flex items-center justify-center text-white/35 hover:text-white hover:border-white/35 transition-colors duration-200 cursor-pointer"
                   >
                     <ArrowLeft size={14} />
                   </button>
                   <button
                     onClick={next}
                     aria-label="Next testimonial"
-                    className="w-10 h-10 border border-white/12 flex items-center justify-center text-white/35 hover:text-white hover:border-white/35 transition-colors duration-200"
+                    className="w-10 h-10 border border-white/12 flex items-center justify-center text-white/35 hover:text-white hover:border-white/35 transition-colors duration-200 cursor-pointer"
                   >
                     <ArrowRight size={14} />
                   </button>
@@ -383,11 +340,12 @@ export function Testimonials() {
                   transition={{ duration: 0.65, ease: EASE }}
                 >
                   <div className="relative w-full h-full">
+                    {/* Testimonial avatar portrait image */}
                     <Image
                       src={t.image}
                       alt={`${t.name} — testimonial`}
                       fill
-                      className="object-contain"
+                      className="object-cover grayscale"
                       sizes="(max-width: 1024px) 100vw, 45vw"
                       quality={90}
                     />
@@ -406,7 +364,7 @@ export function Testimonials() {
               className="mt-4 text-[0.55rem] tracking-[0.2em] uppercase text-white/22 font-medium text-center"
               style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
             >
-              Unedited · Direct from {t.source === 'Client' ? 'the client' : t.source}
+              Unedited · Direct from {t.name}
             </p>
           </div>
         </div>

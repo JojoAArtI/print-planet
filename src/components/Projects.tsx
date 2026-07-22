@@ -10,196 +10,73 @@ import { ArrowUpRight } from 'lucide-react';
 gsap.registerPlugin(ScrollTrigger);
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-const PROJECTS = [
-  {
-    id: 'autoboy',
-    name: 'Autoboy Express',
-    category: 'B2B / B2C Marketplace',
-    tagline: 'Dual-sided automotive marketplace on Go microservices. Real-time inventory, Redis-cached feeds, React seller dashboard. 30% DB latency reduction.',
-    stack: ['React', 'Go', 'PostgreSQL', 'Redis'],
-    image: '/projects/autoboy.png',
-    year: '2025',
-    link: 'https://autoboyexpress.com',
-  },
-  {
-    id: 'recoverderm',
-    name: 'RecoverDerm',
-    category: 'Paramedical Platform',
-    tagline: 'Full stack for a paramedical clinic. Secure patient portals, treatment tracking, headless CMS. JWT + refresh token rotation, HIPAA-compliant.',
-    stack: ['Next.js', 'Django', 'PostgreSQL'],
-    image: '/projects/recoverderm.png',
-    year: '2026',
-    link: 'https://recoverderm.ca',
-  },
-  {
-    id: 'anoc',
-    name: 'Anoc.ng',
-    category: 'Audit / Finance',
-    tagline: 'Platform for Chartered Accountants to handle compliance, manage documents, and keep audit records clean. Encrypted pipelines, zero breaches.',
-    stack: ['Next.js', 'Node.js', 'PostgreSQL'],
-    image: '/projects/anoc.png',
-    year: '2025',
-    link: 'https://anoc.ng',
-  },
-  {
-    id: 'wytnest',
-    name: 'Wytnest',
-    category: 'Testimonial SaaS',
-    tagline: 'Multi-tenant testimonial platform — campaigns, video via Cloudflare Stream, shadow DOM widget embeds, and idempotent dual-rail payments: Paystack NGN + Stripe USD.',
-    stack: ['Next.js', 'Supabase', 'Cloudflare', 'Paystack', 'Stripe'],
-    image: '/projects/wytnest_hero.png',
-    year: '2026',
-    link: 'https://wytnest.vercel.app',
-  },
-  {
-    id: 'nextgen',
-    name: 'NextGen Robotics',
-    category: 'Automation Hub',
-    tagline: 'Web platform and cloud deployment for a robotics company. CI/CD automation, Go backend, AWS. 25% user engagement lift post-launch.',
-    stack: ['Next.js', 'Go', 'AWS', 'Docker'],
-    image: '/projects/nextgen.png',
-    year: '2025',
-    link: 'https://nextgenerationrobotics.org',
-  },
-  {
-    id: 'axflo',
-    name: 'Axflo Oil & Gas',
-    category: 'Enterprise CMS',
-    tagline: 'Headless CMS for an oil & gas company with workflow automation, document generation, and role-based access. Cut manual ops by 60%.',
-    stack: ['Next.js', 'Django', 'PostgreSQL'],
-    image: '/projects/axflo.png',
-    year: '2025',
-    link: 'https://axfloo.com',
-  },
-  {
-    id: 'samdus',
-    name: 'Samdus Oil & Gas',
-    category: 'Corp Portfolio',
-    tagline: 'Corporate site for an oil & gas company. Custom GSAP animations, SEO-first build, 98/100 on Lighthouse. Sub-1s LCP.',
-    stack: ['Next.js', 'Django'],
-    image: '/projects/samdus1_1.jpg',
-    year: '2024',
-    link: 'https://samdus.com',
-  },
-  {
-    id: 'deets',
-    name: 'Deets',
-    category: 'Industrial System',
-    tagline: 'Manufacturing platform with real-time production tracking, compliance workflows, and WebSocket-powered reporting.',
-    stack: ['React', 'Node.js', 'PostgreSQL'],
-    image: '/projects/deets.png',
-    year: '2025',
-    link: 'https://deetsnigeria.org',
-  },
-  {
-    id: 'handyman',
-    name: 'All A Handyman',
-    category: 'Lead Generation',
-    tagline: 'Lead gen site for a home services company. Conversion-tuned landing pages, qualified inquiries tripled post-launch.',
-    stack: ['React', 'Node.js', 'Tailwind'],
-    image: '/projects/handyman3.jpg',
-    year: '2024',
-  },
-  {
-    id: 'twerk',
-    name: 'Twerk Queen Lagos',
-    category: 'Event Portfolio',
-    tagline: 'Event portfolio for a professional performer. GSAP showcase, booking engine, 60fps scroll animations, sub-800ms FCP.',
-    stack: ['Next.js', 'Tailwind', 'GSAP'],
-    image: '/projects/twerkqueenlagos.jpg',
-    year: '2024',
-  },
-  {
-    id: 'chrisconteras',
-    name: 'Chris Conteras',
-    category: 'Cleaning Agency',
-    tagline: 'Lead gen site for a Texas cleaning agency. SEO-first build, optimised inquiry funnels, qualified bookings up since launch.',
-    stack: ['Next.js', 'Tailwind', 'SEO'],
-    image: '/projects/chrisconteras.png',
-    year: '2025',
-    link: 'https://chriscleanstexas.com',
-  },
-  {
-    id: 'myrakeleher',
-    name: 'Myra Keleher',
-    category: 'Cleaning Agency',
-    tagline: 'Cleaning agency site for Florida. Service showcase, instant quote flow, form completion up 40%.',
-    stack: ['React', 'Node.js', 'Tailwind'],
-    image: '/projects/myrakeleher.png',
-    year: '2025',
-    link: 'https://myrakelehercleaning.com',
-  },
-  {
-    id: 'techhub',
-    name: 'TechHub',
-    category: 'Dev Community',
-    tagline: 'Open source dev community. Project showcases, resource sharing, real-time activity feeds.',
-    stack: ['React', 'Node.js', 'PostgreSQL'],
-    image: '/projects/techhub.png',
-    year: '2023',
-    link: 'https://github.com/Donrington/techhub',
-  },
-  {
-    id: 'amanigo',
-    name: 'Amanigo Travels',
-    category: 'Travel Mgmt App',
-    tagline: 'Travel management app with booking engine, itinerary builder, and integrations with global travel providers. Idempotent payments.',
-    stack: ['Next.js', 'Django', 'PostgreSQL'],
-    image: '/projects/amanigo.png',
-    year: '2024',
-  },
-  {
-    id: 'rokeyla',
-    name: 'Rokeyla Fashion',
-    category: 'Ecommerce',
-    tagline: 'E-commerce platform for a fashion brand. Stripe integration, live inventory sync via pg_notify, scales with traffic.',
-    stack: ['Next.js', 'Stripe', 'PostgreSQL'],
-    image: '/projects/rokeyla.jpg',
-    year: '2024',
-  },
-  {
-    id: 'krkmotors',
-    name: 'KRK Motors',
-    category: 'Brand Site',
-    tagline: 'Brand site for a premium auto dealership. GSAP animations, sub-1s load time, clean automotive aesthetic.',
-    stack: ['Next.js', 'GSAP', 'Tailwind'],
-    image: '/projects/krkmotors.png',
-    year: '2024',
-    link: 'https://krk-motors.vercel.app',
-  },
-  {
-    id: 'tuantling',
-    name: 'Tuan Tling Vinyl Flooring',
-    category: 'Home Services',
-    tagline: 'SEO-optimised service platform for a vinyl flooring specialist. Service showcase, quote request funnels, sub-1s LCP.',
-    stack: ['Next.js', 'Tailwind', 'SEO'],
-    image: '/projects/tuantling.png',
-    year: '2026',
-    link: 'https://tuantlingvinylflooring.com',
-  },
-  {
-    id: 'chronos',
-    name: 'Chronos',
-    category: 'Ambient AI Platform',
-    tagline: 'Adaptive ambient display system powered by Google Gemini. Auto-tags images with AI, scores content by time-of-day, mood, and context. Cloudinary-backed storage with user feedback loop.',
-    stack: ['Python', 'Streamlit', 'PostgreSQL', 'Gemini AI'],
-    image: '/projects/chronos.png',
-    year: '2026',
-    link: 'https://thechronosaura.com',
-  },
-  {
-    id: 'circlesoflife',
-    name: 'Circles of Life Healthcare',
-    category: 'Healthcare + AI Platform',
-    tagline: 'Marketing site, admin CMS, and a four-feature Claude-powered care-advisor suite for an Atlanta in-home care provider. Streaming AI chat, care assessment, applicant auto-scoring, Supabase RLS.',
-    stack: ['Next.js', 'Supabase', 'Claude AI', 'GSAP'],
-    image: '/logo/colhcs.png',
-    year: '2026',
-    link: 'https://circlesoflifehcs.com',
-  },
-] as const;
+interface Project {
+  id: string;
+  name: string;
+  category: string;
+  tagline: string;
+  stack: readonly string[];
+  image: string;
+  year: string;
+  link?: string;
+}
 
-type Project = (typeof PROJECTS)[number];
+const PROJECTS: readonly Project[] = [
+  {
+    id: 'apparel',
+    name: 'Custom Apparel',
+    category: 'T-Shirts & Sweatshirts',
+    tagline: 'Premium DTF and screen-printed hoodies, sweatshirts, and custom t-shirts. 100% combed cotton, vibrant color gradients, and long-lasting fabric prints.',
+    stack: ['DTF Print', 'Screen Print', 'Embroidery'],
+    image: '/projects/apparel.png',
+    year: 'Premium',
+  },
+  {
+    id: 'drinkware',
+    name: 'Bespoke Drinkware',
+    category: 'Mugs & Bottles',
+    tagline: 'High-grade ceramic coffee mugs and double-walled insulated water bottles. Dishwasher-safe sublimation printing with crisp vector branding and photography.',
+    stack: ['Sublimation', 'Laser Engrave'],
+    image: '/projects/drinkware.png',
+    year: 'Custom',
+  },
+  {
+    id: 'frames',
+    name: 'Photo Frames',
+    category: 'Wall Art & Gifts',
+    tagline: 'High-fidelity printing on premium matte papers, framed in durable polymer borders with anti-glare glass. Keep your favorite memories visible every single day.',
+    stack: ['High-Res Print', 'Bespoke Framing'],
+    image: '/projects/frames.png',
+    year: 'Exclusive',
+  },
+  {
+    id: 'accessories',
+    name: 'Personalized Accessories',
+    category: 'Keychains & Mousepads',
+    tagline: 'Polished acrylic and metal photo keychains alongside heavy-duty rubber mouse pads with non-slip backing. The perfect pocket-sized and desktop personalization.',
+    stack: ['Direct Print', 'Precision Cut'],
+    image: '/projects/accessories.png',
+    year: 'Essential',
+  },
+  {
+    id: 'mobile-covers',
+    name: 'Mobile Back Covers',
+    category: 'Tech Protection',
+    tagline: 'Durable, impact-resistant polycarbonate back covers customized with your pictures or designs. Scratch-resistant matte finish with precise cutouts.',
+    stack: ['UV Direct Print', 'Gloss/Matte Finish'],
+    image: '/projects/mobile_covers.png',
+    year: 'Stylish',
+  },
+  {
+    id: 'school-merch',
+    name: 'Uniforms & ID Cards',
+    category: 'School & Corporate',
+    tagline: 'Accredited school uniforms, durable card lanyards, and professional barcode/chip-enabled student identification cards. Engineered for everyday durability.',
+    stack: ['Thermal Print', 'Dye Sublimation', 'Embroidery'],
+    image: '/projects/school_uniforms.png',
+    year: 'Professional',
+  },
+];
 
 // ─── Cube geometry ─────────────────────────────────────────────────────────────
 // Scene 0 = intro, scenes 1–16 = projects
@@ -476,7 +353,7 @@ function ProjectCard({ project, align }: { project: Project; align: 'left' | 'ri
       </div>
 
       {/* CTA */}
-      {'link' in project && project.link && (
+      {project.link && (
         <div style={{ display: 'flex', justifyContent: right ? 'flex-end' : 'flex-start' }}>
           <a
             href={project.link}
@@ -636,14 +513,14 @@ export function Projects() {
             className="text-[0.52rem] tracking-[0.25em] uppercase font-medium"
             style={{ fontFamily: 'Satoshi, system-ui, sans-serif', color: 'rgba(255,255,255,0.18)' }}
           >
-            02 / Work
+            02 / Products
           </span>
           <div style={{ width: '2rem', height: '1px', background: 'rgba(255,255,255,0.1)' }} />
           <span
             className="text-[0.52rem] tracking-[0.25em] uppercase font-medium"
             style={{ fontFamily: 'Satoshi, system-ui, sans-serif', color: 'rgba(255,255,255,0.1)' }}
           >
-            {PROJECTS.length} Projects
+            {PROJECTS.length} Categories
           </span>
         </div>
 
@@ -848,7 +725,7 @@ export function Projects() {
                     marginBottom: '1.5rem',
                   }}
                 >
-                  Selected Work&nbsp;·&nbsp;{PROJECTS.length} Projects
+                  Our Products&nbsp;·&nbsp;{PROJECTS.length} Categories
                 </p>
                 <h2
                   style={{
@@ -861,7 +738,7 @@ export function Projects() {
                     marginBottom: '0.15em',
                   }}
                 >
-                  Selected{' '}
+                  Featured{' '}
                   <span
                     style={{
                       fontFamily: 'var(--font-instrument), Georgia, serif',
@@ -870,7 +747,7 @@ export function Projects() {
                       color: 'rgba(255,255,255,0.18)',
                     }}
                   >
-                    Work
+                    Catalog
                   </span>
                 </h2>
                 <p
@@ -921,7 +798,7 @@ export function Projects() {
                     marginBottom: '1.25rem',
                   }}
                 >
-                  Selected Work&nbsp;·&nbsp;{PROJECTS.length} Projects
+                  Our Products&nbsp;·&nbsp;{PROJECTS.length} Categories
                 </p>
                 <h2
                   style={{
@@ -933,7 +810,7 @@ export function Projects() {
                     color: 'rgba(255,255,255,0.92)',
                   }}
                 >
-                  Selected{' '}
+                  Featured{' '}
                   <span
                     style={{
                       fontFamily: 'var(--font-instrument), Georgia, serif',
@@ -942,7 +819,7 @@ export function Projects() {
                       color: 'rgba(255,255,255,0.18)',
                     }}
                   >
-                    Work
+                    Catalog
                   </span>
                 </h2>
                 <p
@@ -976,7 +853,7 @@ export function Projects() {
                     marginBottom: '0.3rem',
                   }}
                 >
-                  02 / Work
+                  02 / Products
                 </p>
                 <h2
                   style={{
@@ -989,7 +866,7 @@ export function Projects() {
                     whiteSpace: 'nowrap',
                   }}
                 >
-                  Selected{' '}
+                  Featured{' '}
                   <span
                     style={{
                       fontFamily: 'var(--font-instrument), Georgia, serif',
@@ -997,7 +874,7 @@ export function Projects() {
                       fontWeight: 400,
                     }}
                   >
-                    Work
+                    Catalog
                   </span>
                 </h2>
               </motion.div>

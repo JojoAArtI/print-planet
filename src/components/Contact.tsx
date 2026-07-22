@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { ArrowUpRight, X } from 'lucide-react';
-import Image from 'next/image';
+import Link from 'next/link';
 import { ContactCanvas } from './ContactCanvas';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -15,29 +15,20 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 const SOCIALS = [
   {
-    label: 'GitHub',
-    href: 'https://github.com/Donrington',
+    label: 'Facebook',
+    href: 'https://www.facebook.com/printplanet',
     svg: (
       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
       </svg>
     ),
   },
   {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/carrington-abakwe-b0b0a0217',
+    label: 'Instagram',
+    href: 'https://www.instagram.com/printplanet',
     svg: (
       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'X',
-    href: 'https://x.com/CarlSwitch_CHUG',
-    svg: (
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.741l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
       </svg>
     ),
   },
@@ -73,8 +64,8 @@ function MagneticCTA({
       onMouseLeave={() => { rawX.set(0); rawY.set(0); }}
       className={
         solid
-          ? 'group inline-flex items-center gap-3 bg-white text-black px-8 py-4 hover:bg-white/85 transition-colors duration-300'
-          : 'group inline-flex items-center gap-3 border border-white/20 px-8 py-4 text-white/60 hover:text-white hover:border-white/50 transition-colors duration-300'
+          ? 'group inline-flex items-center gap-3 bg-white text-black px-8 py-4 hover:bg-white/85 transition-colors duration-300 cursor-pointer'
+          : 'group inline-flex items-center gap-3 border border-white/20 px-8 py-4 text-white/60 hover:text-white hover:border-white/50 transition-colors duration-300 cursor-pointer'
       }
       whileHover={!solid ? { backgroundColor: 'rgba(255,255,255,0.04)' } : undefined}
     >
@@ -104,11 +95,11 @@ function getErrors(f: FormState): FieldErrors {
 }
 
 /* ── Contact modal ────────────────────────────────────────────────────────── */
-function ContactModal({ intent, onClose }: { intent: 'message' | 'call'; onClose: () => void }) {
+function ContactModal({ onClose }: { onClose: () => void }) {
   const [form, setForm] = useState<FormState>({
     name: '',
     email: '',
-    message: intent === 'call' ? 'I’d like to book a quick call to discuss a project. My availability / timezone is: ' : '',
+    message: '',
   });
   const [touched, setTouched] = useState({ name: false, email: false, message: false });
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
@@ -190,7 +181,7 @@ function ContactModal({ intent, onClose }: { intent: 'message' | 'call'; onClose
                 className="text-[0.55rem] tracking-[0.28em] uppercase text-white/25 font-medium block mb-2"
                 style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
               >
-                {intent === 'call' ? 'Book a Call' : 'Get in Touch'}
+                Get in Touch
               </span>
               <h2
                 className="font-black text-white tracking-[-0.035em] leading-tight"
@@ -200,7 +191,7 @@ function ContactModal({ intent, onClose }: { intent: 'message' | 'call'; onClose
                   fontSize: 'clamp(1.6rem, 4vw, 2.2rem)',
                 }}
               >
-                {intent === 'call' ? 'Let’s' : 'Start a'}{' '}
+                Start a{' '}
                 <span
                   style={{
                     fontFamily: 'var(--font-instrument), Georgia, serif',
@@ -209,13 +200,13 @@ function ContactModal({ intent, onClose }: { intent: 'message' | 'call'; onClose
                     color: 'rgba(255,255,255,0.32)',
                   }}
                 >
-                  {intent === 'call' ? 'talk' : 'conversation'}
+                  conversation
                 </span>
               </h2>
             </div>
             <button
               onClick={onClose}
-              className="w-9 h-9 border border-white/12 flex items-center justify-center text-white/30 hover:text-white hover:border-white/35 transition-colors duration-200 shrink-0 mt-1"
+              className="w-9 h-9 border border-white/12 flex items-center justify-center text-white/30 hover:text-white hover:border-white/35 transition-colors duration-200 shrink-0 mt-1 cursor-pointer"
             >
               <X size={14} />
             </button>
@@ -238,17 +229,17 @@ function ContactModal({ intent, onClose }: { intent: 'message' | 'call'; onClose
                     fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)',
                   }}
                 >
-                  Message received.
+                  Quote request received.
                 </p>
                 <p
                   className="text-white/30 text-sm"
                   style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
                 >
-                  I&apos;ll be in touch within 24 hours.
+                  Our print specialists will be in touch within 24 hours.
                 </p>
                 <button
                   onClick={onClose}
-                  className="mt-8 text-[0.6rem] tracking-[0.2em] uppercase text-white/25 hover:text-white/60 transition-colors"
+                  className="mt-8 text-[0.6rem] tracking-[0.2em] uppercase text-white/25 hover:text-white/60 transition-colors cursor-pointer"
                   style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
                 >
                   Close
@@ -312,7 +303,7 @@ function ContactModal({ intent, onClose }: { intent: 'message' | 'call'; onClose
                     className="block text-[0.58rem] tracking-[0.18em] uppercase text-white/28 mb-2 font-medium"
                     style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
                   >
-                    Message
+                    Message Details
                   </label>
                   <textarea
                     rows={5}
@@ -321,7 +312,7 @@ function ContactModal({ intent, onClose }: { intent: 'message' | 'call'; onClose
                     onBlur={() => setTouched((p) => ({ ...p, message: true }))}
                     className={`${fieldClass(touched.message && !!errors.message)} resize-none`}
                     style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
-                    placeholder="Tell me about your project..."
+                    placeholder="Describe your custom print project (quantities, sizes, product categories, or deadline)..."
                     aria-invalid={touched.message && !!errors.message}
                   />
                   {touched.message && errors.message && (
@@ -341,10 +332,10 @@ function ContactModal({ intent, onClose }: { intent: 'message' | 'call'; onClose
                 <button
                   type="submit"
                   disabled={status === 'sending' || !isValid}
-                  className="w-full bg-white text-black py-4 text-[0.62rem] tracking-[0.22em] uppercase font-semibold hover:bg-white/88 transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed mt-2"
+                  className="w-full bg-white text-black py-4 text-[0.62rem] tracking-[0.22em] uppercase font-semibold hover:bg-white/88 transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed mt-2 cursor-pointer"
                   style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
                 >
-                  {status === 'sending' ? 'Sending...' : intent === 'call' ? 'Request Call' : 'Send Message'}
+                  {status === 'sending' ? 'Sending...' : 'Send Quote Request'}
                 </button>
               </motion.form>
             )}
@@ -361,18 +352,17 @@ export function Contact() {
   const emailRef     = useRef<HTMLAnchorElement>(null);
   const wordmarkRef  = useRef<HTMLSpanElement>(null);
   const sectionInView = useInView(sectionRef, { once: true, margin: '-12%' });
-  const [modal, setModal] = useState<null | 'message' | 'call'>(null);
+  const [modal, setModal] = useState<null | 'message'>(null);
 
   useEffect(() => {
-    const handler = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      setModal(detail === 'call' ? 'call' : 'message');
+    const handler = () => {
+      setModal('message');
     };
     window.addEventListener('open-contact-modal', handler);
     return () => window.removeEventListener('open-contact-modal', handler);
   }, []);
 
-  /* ── CYBERSAGE wordmark animation ── */
+  /* ── PRINT PLANET wordmark animation ── */
   useEffect(() => {
     const el = wordmarkRef.current;
     if (!el) return;
@@ -383,12 +373,6 @@ export function Contact() {
       const split = new SplitText(el, { type: 'chars' });
       const chars = split.chars as HTMLElement[];
 
-      /*
-       * The span's text color is already rgba(255,255,255,0.032).
-       * Animating GSAP `opacity` would compound with that color alpha
-       * and make the text invisible. Instead, we set an explicit `color`
-       * on each char and animate THAT — leaving CSS opacity untouched.
-       */
       gsap.set(chars, {
         color: 'rgba(255,255,255,0)',
         y: -40,
@@ -398,7 +382,7 @@ export function Contact() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: el,
-          start: 'top bottom', // fire as soon as any part enters viewport
+          start: 'top bottom',
           toggleActions: 'play none none none',
         },
       });
@@ -421,7 +405,7 @@ export function Contact() {
         ease: 'power2.inOut',
       }, '-=0.7');
 
-      /* 3 — continuous idle float (y only — never touches color) */
+      /* 3 — continuous idle float */
       chars.forEach((char, i) => {
         gsap.to(char, {
           y: `${2 + Math.sin(i * 0.9) * 3}px`,
@@ -433,7 +417,7 @@ export function Contact() {
         });
       });
 
-      /* 4 — periodic glitch on a random character (color-based, not opacity) */
+      /* 4 — periodic glitch on a random character */
       const scheduleGlitch = (delay = 4200) => {
         glitchTimer = setTimeout(() => {
           if (!chars.length) return;
@@ -474,6 +458,10 @@ export function Contact() {
     return () => ctx.revert();
   }, []);
 
+  const openWhatsApp = () => {
+    window.open('https://wa.me/918292349048?text=Hello%20Print%20Planet,%20I%20would%20like%20to%20request%20a%20custom%20printing%20quote.', '_blank');
+  };
+
   return (
     <>
       <section
@@ -487,7 +475,7 @@ export function Contact() {
           <ContactCanvas />
         </div>
 
-        <div className="relative z-10 max-w-360 mx-auto px-[clamp(1.25rem,5vw,5rem)] pt-[clamp(5rem,10vw,11rem)] pb-0">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-[clamp(1.25rem,5vw,5rem)] pt-[clamp(5rem,10vw,11rem)] pb-0">
 
           {/* Section label */}
           <div className="flex items-center gap-4 mb-[clamp(3rem,6vw,8rem)]">
@@ -498,7 +486,7 @@ export function Contact() {
               animate={sectionInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, ease: EASE }}
             >
-              08 / Contact
+              09 / Contact
             </motion.span>
             <motion.div
               className="flex-1 h-px bg-white/10"
@@ -521,13 +509,13 @@ export function Contact() {
               animate={sectionInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
             >
-              Have a project in mind?
+              Have a custom printing project in mind?
             </motion.p>
 
             <div className="overflow-hidden mb-8">
               <a
                 ref={emailRef}
-                href="mailto:abakwecarrington@gmail.com"
+                href="mailto:onezero1solutions@gmail.com"
                 className="block font-black text-white tracking-[-0.04em] leading-[0.88] hover:text-white/45 transition-colors duration-300 will-change-transform"
                 style={{
                   fontFamily: 'Satoshi, system-ui, sans-serif',
@@ -536,7 +524,7 @@ export function Contact() {
                   wordBreak: 'break-all',
                 }}
               >
-                abakwecarrington@gmail.com
+                onezero1solutions@gmail.com
               </a>
             </div>
 
@@ -546,10 +534,10 @@ export function Contact() {
               animate={sectionInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
             >
-              <MagneticCTA label="Book a Call" variant="solid" onClick={() => setModal('call')} />
-              <MagneticCTA label="Send a Message" onClick={() => setModal('message')} />
+              <MagneticCTA label="WhatsApp Chat" variant="solid" onClick={openWhatsApp} />
+              <MagneticCTA label="Request Quote" onClick={() => setModal('message')} />
               <a
-                href="mailto:abakwecarrington@gmail.com"
+                href="mailto:onezero1solutions@gmail.com"
                 className="text-[0.62rem] tracking-[0.18em] uppercase text-white/28 hover:text-white/60 transition-colors duration-200 font-medium"
                 style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
               >
@@ -566,9 +554,9 @@ export function Contact() {
             transition={{ duration: 0.6, delay: 0.55, ease: EASE }}
           >
             {[
-              { label: 'Location', value: 'Lagos, Nigeria · Remote Worldwide' },
-              { label: 'Response', value: 'Within 24 hours' },
-              { label: 'Status', value: 'Available for projects', pulse: true },
+              { label: 'Location', value: 'Faridabad, Haryana · India' },
+              { label: 'Response', value: 'Within 2 hours (WhatsApp)' },
+              { label: 'Status', value: 'Accepting bulk orders', pulse: true },
             ].map((item, i) => (
               <div
                 key={item.label}
@@ -581,7 +569,7 @@ export function Contact() {
                   {item.label}
                 </p>
                 <div className="flex items-center gap-2">
-                  {item.pulse && <span className="w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse shrink-0" />}
+                  {item.pulse && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />}
                   <p
                     className="text-white/55 font-medium"
                     style={{
@@ -612,17 +600,17 @@ export function Contact() {
                 fontWeight: 900,
                 fontSize: 'clamp(4.5rem, 18vw, 22rem)',
                 letterSpacing: '-0.02em',
-                color: 'rgba(255,255,255,0.032)',
+                color: 'rgba(255,255,255,0.022)',
                 lineHeight: 0.82,
                 whiteSpace: 'nowrap',
                 userSelect: 'none',
               }}
             >
-              CYBERSAGE
+              PRINT PLANET
             </span>
           </div>
 
-          <div className="relative z-10 max-w-360 mx-auto px-[clamp(1.25rem,5vw,5rem)] py-[clamp(3rem,5vw,5rem)]">
+          <div className="relative z-10 max-w-[1440px] mx-auto px-[clamp(1.25rem,5vw,5rem)] py-[clamp(3rem,5vw,5rem)]">
 
             {/* Top row: logo + socials */}
             <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-6 sm:gap-8 mb-10 sm:mb-12">
@@ -632,13 +620,11 @@ export function Contact() {
                 animate={sectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.6, ease: EASE }}
               >
-                <Image
-                  src="/sage/sage_prim_white.png"
-                  alt="Cybersage"
-                  width={130}
-                  height={32}
-                  className="opacity-40 hover:opacity-70 transition-opacity duration-300"
-                />
+                <div className="flex items-center gap-2">
+                  <span className="text-white font-extrabold text-xl tracking-tight">
+                    PRINT <span className="text-white/40 font-light">PLANET</span>
+                  </span>
+                </div>
               </motion.div>
 
               {/* Socials */}
@@ -655,7 +641,7 @@ export function Contact() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="w-9 h-9 border border-white/12 flex items-center justify-center text-white/25 hover:text-white hover:border-white/35 transition-all duration-200"
+                    className="w-9 h-9 border border-white/12 flex items-center justify-center text-white/25 hover:text-white hover:border-white/35 transition-all duration-200 cursor-pointer"
                   >
                     {svg}
                   </a>
@@ -671,23 +657,21 @@ export function Contact() {
               transition={{ duration: 0.5, delay: 0.75, ease: EASE }}
             >
               {[
-                { label: 'About', href: '#about' },
-                { label: 'Projects', href: '#work' },
-                { label: 'Services', href: '#services' },
-                { label: 'Process', href: '#process' },
-                { label: 'Experience', href: '#experience' },
-                { label: 'Credentials', href: '#credentials' },
-                { label: 'Reviews', href: '#testimonials' },
-                { label: 'Contact', href: '#contact' },
+                { label: 'About', href: '/about' },
+                { label: 'Products', href: '/products' },
+                { label: 'Gallery', href: '/gallery' },
+                { label: 'FAQ', href: '/#faq' },
+                { label: 'Reviews', href: '/#testimonials' },
+                { label: 'Contact', href: '/contact' },
               ].map(({ label, href }) => (
-                <a
+                <Link
                   key={label}
                   href={href}
-                  className="text-[0.58rem] tracking-[0.2em] uppercase text-white/22 hover:text-white/60 transition-colors duration-200 font-medium text-center sm:text-left"
+                  className="text-[0.58rem] tracking-[0.2em] uppercase text-white/22 hover:text-white/60 transition-colors duration-200 font-medium text-center sm:text-left cursor-pointer"
                   style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
                 >
                   {label}
-                </a>
+                </Link>
               ))}
             </motion.div>
 
@@ -698,13 +682,8 @@ export function Contact() {
               animate={sectionInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.8, ease: EASE }}
             >
-              <a
-                href="https://websitelaunches.com/site/cybersage.dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 border border-white/10 px-4 py-3 hover:border-white/22 transition-all duration-300"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-white/22 group-hover:bg-white/50 shrink-0 transition-colors duration-300" />
+              <div className="group inline-flex items-center gap-3 border border-white/10 px-4 py-3 hover:border-white/22 transition-all duration-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/50 group-hover:bg-emerald-400 shrink-0 transition-colors duration-300 animate-pulse" />
                 <div className="flex flex-col gap-[3px]">
                   <span
                     style={{
@@ -715,9 +694,8 @@ export function Contact() {
                       color: 'rgba(255,255,255,0.35)',
                       fontWeight: 600,
                     }}
-                    className="group-hover:text-white/58 transition-colors duration-300"
                   >
-                    Established Online
+                    Established 2026
                   </span>
                   <span
                     style={{
@@ -729,14 +707,10 @@ export function Contact() {
                       fontWeight: 500,
                     }}
                   >
-                    Public launch record
+                    Premium custom prints
                   </span>
                 </div>
-                <ArrowUpRight
-                  size={9}
-                  className="text-white/18 group-hover:text-white/45 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0"
-                />
-              </a>
+              </div>
             </motion.div>
 
             {/* Bottom bar */}
@@ -750,13 +724,13 @@ export function Contact() {
                 className="text-[0.55rem] tracking-[0.16em] uppercase text-white/18 font-medium text-center sm:text-left"
                 style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
               >
-                © 2026 Abakwe Carrington · Cybersage · Software Engineer, Lagos, Nigeria
+                © 2026 Print Planet. All rights reserved. Premium custom printing services.
               </p>
               <p
                 className="text-[0.55rem] tracking-[0.14em] uppercase text-white/12 text-center sm:text-right"
                 style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
               >
-                Designed &amp; Developed by Carrington
+                Designed &amp; Developed for Print Planet
               </p>
             </motion.div>
           </div>  {/* end z-10 wrapper */}
@@ -765,7 +739,7 @@ export function Contact() {
 
       {/* Modal portal */}
       <AnimatePresence>
-        {modal && <ContactModal intent={modal} onClose={() => setModal(null)} />}
+        {modal && <ContactModal onClose={() => setModal(null)} />}
       </AnimatePresence>
     </>
   );

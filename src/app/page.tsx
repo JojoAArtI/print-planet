@@ -11,7 +11,7 @@ import { About } from '@/components/About';
 import { Projects } from '@/components/Projects';
 import { Services } from '@/components/Services';
 import { Experience } from '@/components/Experience';
-import { Credentials } from '@/components/Credentials';
+import { FAQ } from '@/components/FAQ';
 import { Marquee } from '@/components/Marquee';
 import { CurrentlyBuilding } from '@/components/CurrentlyBuilding';
 import { Process } from '@/components/Process';
@@ -19,7 +19,6 @@ import { Testimonials } from '@/components/Testimonials';
 import { PricingPromo } from '@/components/PricingPromo';
 import { Stack } from '@/components/Stack';
 import { Contact } from '@/components/Contact';
-import { AIAssistant } from '@/components/AIAssistant';
 import { CustomCursor } from '@/components/CustomCursor';
 
 function BackToTop() {
@@ -69,13 +68,12 @@ export default function Home() {
           <Services />
           <Process />
           <Experience />
-          <Credentials />
+          <FAQ />
           <Testimonials />
           <PricingPromo />
           <Contact />
         </main>
         <BackToTop />
-        <AIAssistant />
       </SmoothScroll>
     </>
   );

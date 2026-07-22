@@ -9,20 +9,20 @@ import Image from 'next/image';
 gsap.registerPlugin(ScrollTrigger);
 
 const STATS = [
-  { label: 'Years of Experience', target: 5,   suffix: '+' },
-  { label: 'Projects Shipped',    target: 50,  suffix: '+' },
-  { label: 'Global Clients',      target: 40, suffix: '+' },
-  { label: 'Countries Served',    target: 8,   suffix: ''  },
+  { label: 'Years of Excellence', target: 10,  suffix: '+' },
+  { label: 'Products Delivered',  target: 10000, suffix: '+' },
+  { label: 'Happy Customers',     target: 500,  suffix: '+' },
+  { label: 'Quality Guarantee',   target: 100,  suffix: '%' },
 ];
 
-const COUNTRIES = [
-  'Nigeria', 'United States', 'Canada', 'United Kingdom',
-  'Australia', 'India', 'Ghana', 'Kenya',
+const PRODUCTS = [
+  'Custom T-Shirts', 'Printed Caps', 'Sweatshirts', 'Coffee Mugs',
+  'Water Bottles', 'Photo Frames', 'Mobile Covers', 'ID Cards',
 ];
 
 const QUOTE_WORDS = [
-  'I', 'architect', 'systems', 'that', "don’t", 'just', 'work', '—',
-  'they', 'scale,', 'survive', 'failure,', 'and', 'stay', 'clean', 'under', 'pressure.',
+  'We', 'transform', 'your', 'everyday', 'memories', 'and', 'brand', 'assets', '—',
+  'into', 'premium,', 'tangible', 'prints', 'designed', 'to', 'impress.',
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -55,7 +55,7 @@ function CountUp({
     return () => ctrl.stop();
   }, [inView, target, count, delay]);
 
-  return <>{display}{suffix}</>;
+  return <>{display.toLocaleString()}{suffix}</>;
 }
 
 /* Word-by-word animated pull quote */
@@ -143,8 +143,7 @@ export function About() {
             initial={{ opacity: 0, x: -12 }}
             animate={sectionInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, ease: EASE }}
-            className="text-[0.6rem] tracking-[0.22em] uppercase text-black/30 font-medium"
-            style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
+            className="text-[0.6rem] tracking-[0.22em] uppercase text-black/30 font-medium font-sans"
           >
             01 / About
           </motion.span>
@@ -156,9 +155,8 @@ export function About() {
           initial={{ opacity: 0, y: 32 }}
           animate={sectionInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.85, delay: 0.1, ease: EASE }}
-          className="font-black text-black tracking-tighter leading-[0.88] mb-[clamp(3rem,6vw,7rem)]"
+          className="font-black text-black tracking-tighter leading-[0.88] mb-[clamp(3rem,6vw,7rem)] font-sans"
           style={{
-            fontFamily: 'Satoshi, system-ui, sans-serif',
             fontWeight: 900,
             fontSize:   'clamp(4rem, 10vw, 13rem)',
           }}
@@ -172,14 +170,14 @@ export function About() {
               color:      'rgba(10,10,10,0.30)',
             }}
           >
-            Me
+            Us
           </span>
         </motion.h2>
 
         {/* Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(3rem,6vw,8rem)]">
 
-          {/* Left: stats + countries */}
+          {/* Left: stats + products */}
           <div className="flex flex-col gap-[clamp(2.5rem,4vw,3.5rem)]">
           <div ref={statsRef} className="grid grid-cols-2 gap-x-8 gap-y-12 content-start">
             {STATS.map((stat, i) => (
@@ -190,9 +188,8 @@ export function About() {
                 transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
               >
                 <p
-                  className="font-black text-black leading-none tracking-tighter tabular-nums"
+                  className="font-black text-black leading-none tracking-tighter tabular-nums font-sans"
                   style={{
-                    fontFamily: 'Satoshi, system-ui, sans-serif',
                     fontWeight: 900,
                     fontSize:   'clamp(3.5rem, 7vw, 9rem)',
                   }}
@@ -209,8 +206,7 @@ export function About() {
                   initial={{ opacity: 0 }}
                   animate={statsInView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.4 + i * 0.1, ease: EASE }}
-                  className="mt-2 text-[0.75rem] font-semibold tracking-[0.14em] uppercase text-black/40"
-                  style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
+                  className="mt-2 text-[0.75rem] font-semibold tracking-[0.14em] uppercase text-black/40 font-sans"
                 >
                   {stat.label}
                 </motion.p>
@@ -226,29 +222,27 @@ export function About() {
             ))}
           </div>
 
-          {/* Countries served */}
+          {/* Specialties served */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={statsInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
           >
             <p
-              className="text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-black/35 mb-4"
-              style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
+              className="text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-black/35 mb-4 font-sans"
             >
-              Shipped across
+              Bespoke Personalization
             </p>
             <div className="flex flex-wrap gap-2">
-              {COUNTRIES.map((country, i) => (
+              {PRODUCTS.map((prod, i) => (
                 <motion.span
-                  key={country}
+                  key={prod}
                   initial={{ opacity: 0, y: 8 }}
                   animate={statsInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.6 + i * 0.05, ease: EASE }}
-                  className="border border-black/12 px-3 py-1.5 text-[0.68rem] font-medium tracking-[0.06em] text-black/50"
-                  style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
+                  className="border border-black/12 px-3 py-1.5 text-[0.68rem] font-medium tracking-[0.06em] text-black/50 font-sans"
                 >
-                  {country}
+                  {prod}
                 </motion.span>
               ))}
             </div>
@@ -267,28 +261,22 @@ export function About() {
               className="space-y-5"
             >
               <p
-                className="text-black/55 leading-relaxed"
+                className="text-black/55 leading-relaxed font-sans"
                 style={{
-                  fontFamily: 'Satoshi, system-ui, sans-serif',
                   fontWeight: 400,
                   fontSize:   'clamp(1.05rem, 1.5vw, 1.3rem)',
                 }}
               >
-                A software engineer based in Lagos, Nigeria — 5+ years designing and running
-                production systems for global clients: multi-tenant compliance platforms, HIPAA
-                medical portals, high-traffic marketplaces. I own the system end-to-end:
-                architecture, infrastructure, backend, delivery.
+                Print Planet is a premier customized printing business dedicated to transforming your creative visions into tangible reality. We work with individuals and companies alike, elevating brand identity and celebrating milestones through affordable, high-quality personalization.
               </p>
               <p
-                className="text-black/40 leading-relaxed"
+                className="text-black/40 leading-relaxed font-sans"
                 style={{
-                  fontFamily: 'Satoshi, system-ui, sans-serif',
                   fontWeight: 400,
                   fontSize:   'clamp(1rem, 1.3vw, 1.15rem)',
                 }}
               >
-                Core: AWS, Docker, Go, Django, PostgreSQL, Redis, CI/CD. Fluent in Next.js for
-                when the system needs a face. I care about the whole system — not just the feature.
+                From custom apparel prints to premium corporate gift boxes, we utilize modern print tech (DTF, sublimation, screen print, embroidery) to deliver flawless results with competitive turnaround times.
               </p>
 
               <motion.div
@@ -298,36 +286,34 @@ export function About() {
                 transition={{ duration: 0.6, delay: 0.8, ease: EASE }}
               >
                 <a
-                  href="https://github.com/Donrington"
+                  href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[0.65rem] tracking-[0.18em] uppercase font-medium text-black/40 hover:text-black border-b border-black/20 hover:border-black pb-px transition-colors"
-                  style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
+                  className="text-[0.65rem] tracking-[0.18em] uppercase font-medium text-black/40 hover:text-black border-b border-black/20 hover:border-black pb-px transition-colors no-underline font-sans"
                 >
-                  GitHub
+                  Facebook
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/carrington-abakwe-b0b0a0217"
+                  href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[0.65rem] tracking-[0.18em] uppercase font-medium text-black/40 hover:text-black border-b border-black/20 hover:border-black pb-px transition-colors"
-                  style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
+                  className="text-[0.65rem] tracking-[0.18em] uppercase font-medium text-black/40 hover:text-black border-b border-black/20 hover:border-black pb-px transition-colors no-underline font-sans"
                 >
-                  LinkedIn
+                  Instagram
                 </a>
               </motion.div>
             </motion.div>
 
-            {/* Headshot — GSAP clip reveal */}
+            {/* Print Shop Image — GSAP clip reveal */}
             <div
               ref={imageRef}
               className="relative aspect-4/3 w-full overflow-hidden bg-black/4"
             >
               <Image
-                src="/me.png"
-                alt="Abakwe Carrington — software engineer and Infrastructure & Systems Architect based in Lagos, Nigeria"
+                src="/exp.jpg"
+                alt="Print Planet customized print shop workshop"
                 fill
-                className="object-cover object-top grayscale"
+                className="object-cover object-center grayscale animate-pulse duration-[8000ms]"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0 mix-blend-multiply bg-white/10" />

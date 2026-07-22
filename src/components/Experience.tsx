@@ -9,165 +9,78 @@ gsap.registerPlugin(ScrollTrigger);
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const EXPERIENCE = [
+const GALLERY_PREVIEW = [
   {
-    year: '2026',
-    role: 'Full Stack Developer',
-    company: 'Recoverderm',
-    type: 'Contract · Remote',
+    year: 'Apparel',
+    role: 'Custom Sweatshirts',
+    company: 'Print Planet Signature',
+    type: 'Direct-to-Film Print',
     bullets: [
-      'HIPAA-compliant patient portals with JWT rotation and encrypted data flows — zero compliance violations.',
-      'Role-based access across patient, clinician, and admin layers, cutting unauthorized access surface by 60%.',
-      'Automated workflows reduced manual admin overhead by 40%. Deployed on AWS with zero-downtime releases.',
+      'Engineered with high-fidelity, crack-resistant DTF transfers on 360 GSM heavy cotton crewnecks.',
+      'Designed with vibrant, full-color gradients that survive 50+ wash cycles without fading.',
+      'Perfect for student cohorts, corporate swag, and streetwear brand starters.',
     ],
-    stack: ['Next.js', 'Django', 'PostgreSQL'],
+    stack: ['DTF Print', '360 GSM Cotton', 'Anti-Peel Transfer'],
   },
   {
-    year: '2025',
-    role: 'Full Stack Developer',
-    company: 'Anoc.ng',
-    type: 'Contract · Remote',
+    year: 'Drinkware',
+    role: 'Insulated Bottles',
+    company: 'Print Planet Drinkware',
+    type: 'Laser Engraved Steel',
     bullets: [
-      'Compliance platform for Chartered Accountants — client intake, documents, and audits in one encrypted system.',
-      'Multi-tenant architecture with strict data isolation supporting 50+ concurrent client cases.',
-      'Automated approval chains cut manual processing time by 50% and eliminated missed compliance deadlines.',
+      'Bespoke laser engraving on double-walled vacuum insulated stainless steel bottles.',
+      'High-precision etching exposes the raw steel beneath, resulting in a durable, permanent logo outline.',
+      'Maintains beverage temperatures: 24h cold, 12h hot. Sleek matte black powder-coat finish.',
     ],
-    stack: ['Next.js', 'Node.js', 'PostgreSQL'],
+    stack: ['Laser Engraving', 'Stainless Steel', 'Matte Finish'],
   },
   {
-    year: '2025',
-    role: 'Software Engineer',
-    company: 'NextGen Robotics',
-    type: 'Contract · Remote',
+    year: 'Drinkware',
+    role: 'Sublimation Mugs',
+    company: 'Print Planet Drinkware',
+    type: 'Sublimation Mug Print',
     bullets: [
-      'Scalable Django backend on cloud infrastructure — 30% performance gain through architecture optimisation.',
-      'CI/CD pipelines and automated provisioning cut deployment time by 45%.',
-      'Zero-trust security and VPN infrastructure reduced vulnerabilities by 20%, downtime by 35%.',
+      'High-gloss ceramic coffee mugs featuring crisp, photo-quality sublimation wraps.',
+      'Vibrant color fidelity showing high-resolution family photos or corporate guidelines.',
+      '100% microwave and dishwasher safe with a specialized scratch-resistant coating.',
     ],
-    stack: ['Next.js', 'Go', 'AWS'],
+    stack: ['Dye Sublimation', 'Ceramic Gloss', 'Dishwasher Safe'],
   },
   {
-    year: '2025',
-    role: 'Sr. Full Stack Developer',
-    company: 'Autoboy',
-    type: 'Full-time · Remote',
+    year: 'Frames',
+    role: 'Bespoke Photo Frames',
+    company: 'Print Planet Wall Art',
+    type: 'High-Res Print & Frame',
     bullets: [
-      'Scaled a dual-sided automotive marketplace with real-time inventory and Go microservices backend.',
-      'Redis caching + connection pool tuning delivered 30% faster DB responses under peak load.',
-      'Rate-limiting and circuit-breaker layers eliminated cascading failures across payment APIs.',
+      'High-res photographic printing on 250 GSM premium matte papers.',
+      'Framed in durable, moisture-resistant polymer borders with anti-glare clear glass covers.',
+      'Ready-to-hang frames custom cut to sizes ranging from A4 to large poster prints.',
     ],
-    stack: ['React', 'Go', 'PostgreSQL', 'Redis'],
+    stack: ['Matte Art Paper', 'High-Res Inkjet', 'Premium Framing'],
   },
   {
-    year: '2024',
-    role: 'Full Stack Developer',
-    company: 'Axflo Oil & Gas',
-    type: 'Contract · Remote',
+    year: 'Accessories',
+    role: 'Printed Mouse Pads',
+    company: 'Print Planet Desktop',
+    type: 'Full-Color Sublimation',
     bullets: [
-      'Full-stack corporate site with Django — improved operational communication efficiency by 40%.',
-      'Job application module with automated email notifications improved processing efficiency by 50%.',
-      'Newsletter system increased subscriber engagement by 35%. Frontend performance up 30% post-integration.',
+      'High-density textile surface optimized for optical mouse sensor accuracy.',
+      'Non-slip natural rubber base prevents slipping during heavy office or gaming workloads.',
+      'Stitched edges resist fraying over long-term desk usage. Washable design.',
     ],
-    stack: ['Next.js', 'Django', 'PostgreSQL'],
+    stack: ['Textile Print', 'Natural Rubber', 'Stitched Edges'],
   },
   {
-    year: '2024',
-    role: 'Web Developer',
-    company: 'KRK Motors',
-    type: 'Contract · Remote',
+    year: 'Corporate',
+    role: 'School Uniforms & IDs',
+    company: 'Print Planet School Merch',
+    type: 'School Merch Customization',
     bullets: [
-      'Premium brand site with GSAP animations — sub-1s load time, 98/100 Lighthouse score.',
-      'Custom scroll-driven animation system tuned to the luxury automotive identity.',
+      'Breathable, premium-stitch school uniform dress shirts, polo shirts, and trackwear.',
+      'Thermal high-speed card printing for barcode and chip-enabled identification cards.',
+      'Custom printed lanyards with metal clips and safety release mechanisms.',
     ],
-    stack: ['Next.js', 'Tailwind', 'GSAP'],
-  },
-  {
-    year: '2024',
-    role: 'Full Stack Developer',
-    company: 'Rokeyla Fashion',
-    type: 'Contract · Remote',
-    bullets: [
-      'Full e-commerce platform with Stripe, live inventory sync via pg_notify, and order lifecycle management.',
-      'Eliminated overselling during demand spikes. Reduced manual dispatch coordination by 55%.',
-    ],
-    stack: ['Next.js', 'Stripe', 'PostgreSQL'],
-  },
-  {
-    year: '2024',
-    role: 'Web Developer',
-    company: 'Samdus Oil and Gas',
-    type: 'Contract · Remote',
-    bullets: [
-      '98/100 Lighthouse score, sub-1s LCP, full Core Web Vitals compliance on INP, LCP, and CLS.',
-      'SEO-first SSR architecture with structured data and custom scroll-driven animation system.',
-    ],
-    stack: ['Next.js', 'Django'],
-  },
-  {
-    year: '2024',
-    role: 'Web Developer',
-    company: 'Handyman & Contractors',
-    type: 'Contract · Remote',
-    bullets: [
-      'Conversion-optimised lead gen site — qualified inquiries tripled within 30 days of launch.',
-      'CRM webhooks and automated lead routing ensured immediate team follow-up on every submission.',
-    ],
-    stack: ['React', 'Node.js', 'Tailwind'],
-  },
-  {
-    year: '2024',
-    role: 'Lead Full Stack Developer',
-    company: 'Amanigo Travels',
-    type: 'Contract · Remote',
-    bullets: [
-      'Booking engine, itinerary builder, and CMS with real-time pricing APIs from global travel providers.',
-      'Idempotent payment API prevented duplicate charges and race conditions across concurrent bookings.',
-    ],
-    stack: ['Next.js', 'Django', 'PostgreSQL'],
-  },
-  {
-    year: '2024',
-    role: 'Team Leader',
-    company: 'Zidio',
-    type: 'Internship · Remote',
-    bullets: [
-      'Led 8 developers across 2 software products — 50% increase in user engagement, 100% deadline hit rate.',
-      'Scrum implementation improved team productivity by 65% and cut feature cycle time by 50%.',
-    ],
-    stack: ['Agile', 'Jira', 'Scrum'],
-  },
-  {
-    year: '2023',
-    role: 'Lead Back-End Engineer',
-    company: 'Dejaii',
-    type: 'Contract · Remote',
-    bullets: [
-      'Built the API integration layer across multiple services into a unified, fault-tolerant pipeline.',
-      'Rewrote critical queries and added caching — significantly reduced p95 latency on high-traffic endpoints.',
-    ],
-    stack: ['Django', 'PostgreSQL', 'REST API'],
-  },
-  {
-    year: '2021',
-    role: 'Full Stack Developer',
-    company: 'Xtus Connect',
-    type: 'Full-time · Remote',
-    bullets: [
-      'Owned full web app lifecycle — architecture through client handoff — over a 2+ year engagement.',
-      'Resolved DB and SSR bottlenecks, improving page load times by 35% across the platform.',
-    ],
-    stack: ['React', 'Django', 'PostgreSQL'],
-  },
-  {
-    year: '2019',
-    role: 'QA Engineer',
-    company: 'Nigerian Bottling Company',
-    type: 'Internship · On-site',
-    bullets: [
-      'Automated Brix level monitoring across production lines — manual inspection cycles cut by 40%.',
-      'Built test harnesses and dashboards giving ops real-time visibility into quality metrics.',
-    ],
-    stack: ['Python', 'Selenium', 'PostgreSQL'],
+    stack: ['Polo Embroidery', 'PVC Thermal Print', 'Ribbon Sublimation'],
   },
 ];
 
@@ -189,7 +102,7 @@ const S = {
 };
 
 /* ── Mobile card ──────────────────────────────────────────────────── */
-function MobileCard({ exp, index }: { exp: (typeof EXPERIENCE)[0]; index: number }) {
+function MobileCard({ exp, index }: { exp: (typeof GALLERY_PREVIEW)[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-8%' });
   const num = String(index + 1).padStart(2, '0');
@@ -322,7 +235,7 @@ function DesktopPanel({
   index,
   total,
 }: {
-  exp: (typeof EXPERIENCE)[0];
+  exp: (typeof GALLERY_PREVIEW)[0];
   index: number;
   total: number;
 }) {
@@ -356,12 +269,12 @@ function DesktopPanel({
           style={{ width: 'clamp(220px,36vw,520px)' }}
         >
           <span
-            className="panel-year block leading-none select-none"
+            className="panel-year block leading-none select-none animate-pulse duration-[5000ms]"
             style={{
               fontFamily: 'var(--font-instrument), Georgia, serif',
               fontStyle: 'italic',
               fontWeight: 400,
-              fontSize: 'clamp(7rem,18vw,24rem)',
+              fontSize: 'clamp(7rem,18vw,20rem)',
               color: '#D9D9D9',
               mixBlendMode: 'difference',
               letterSpacing: '-0.045em',
@@ -485,10 +398,10 @@ export function Experience() {
             });
 
             /* Live panel label */
-            const idx = Math.min(EXPERIENCE.length - 1, Math.floor(self.progress * EXPERIENCE.length));
+            const idx = Math.min(GALLERY_PREVIEW.length - 1, Math.floor(self.progress * GALLERY_PREVIEW.length));
             if (labelRef.current) {
               labelRef.current.textContent =
-                `${String(idx + 1).padStart(2, '0')} · ${EXPERIENCE[idx].role} · ${EXPERIENCE[idx].company}`;
+                `${String(idx + 1).padStart(2, '0')} · ${GALLERY_PREVIEW[idx].role} · ${GALLERY_PREVIEW[idx].type}`;
             }
           },
         },
@@ -562,7 +475,7 @@ export function Experience() {
           animate={sectionInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, ease: EASE }}
         >
-          05 / Experience
+          05 / Gallery Preview
         </motion.span>
         <motion.div
           className="flex-1 h-px"
@@ -576,7 +489,7 @@ export function Experience() {
       <h2
         style={{ fontFamily: 'Satoshi, system-ui, sans-serif', fontWeight: 900, fontSize: 'clamp(2.4rem,7vw,8rem)', letterSpacing: '-0.04em', lineHeight: 0.9, color: '#FFFFFF', mixBlendMode: 'difference' }}
       >
-        {(['Where', "I've"] as const).map((word, i) => (
+        {(['Explore', "Our"] as const).map((word, i) => (
           <span key={word} className="inline-block overflow-hidden mr-[0.22em]">
             <motion.span
               className="block"
@@ -597,7 +510,7 @@ export function Experience() {
             animate={sectionInView ? { y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.28, ease: EASE }}
           >
-            Worked
+            Showcase
           </motion.span>
         </span>
       </h2>
@@ -622,7 +535,7 @@ export function Experience() {
         <div className="relative z-10">
           {Header}
           <div>
-            {EXPERIENCE.map((exp, i) => (
+            {GALLERY_PREVIEW.map((exp, i) => (
               <MobileCard key={i} exp={exp} index={i} />
             ))}
           </div>
@@ -665,7 +578,7 @@ export function Experience() {
             }}
           >
             <span ref={labelRef} style={{ ...S.label, color: '#D9D9D9', mixBlendMode: 'difference' }}>
-              01 · Full Stack Developer · Recoverderm
+              01 · Custom Sweatshirts · Direct-to-Film Print
             </span>
             <span style={{ ...S.micro, color: '#D9D9D9', mixBlendMode: 'difference' }}>
               ← Drag to navigate →
@@ -676,10 +589,10 @@ export function Experience() {
           <div
             ref={trackRef}
             className="relative z-10 flex h-full"
-            style={{ width: `${EXPERIENCE.length * 100}vw`, willChange: 'transform' }}
+            style={{ width: `${GALLERY_PREVIEW.length * 100}vw`, willChange: 'transform' }}
           >
-            {EXPERIENCE.map((exp, i) => (
-              <DesktopPanel key={i} exp={exp} index={i} total={EXPERIENCE.length} />
+            {GALLERY_PREVIEW.map((exp, i) => (
+              <DesktopPanel key={i} exp={exp} index={i} total={GALLERY_PREVIEW.length} />
             ))}
           </div>
         </div>

@@ -5,16 +5,15 @@ import { motion } from 'framer-motion';
 
 // ─── Floating vocabulary ───────────────────────────────────────────────────────
 const WORDS = [
-  'Next.js',     'Go',           'Django',        'PostgreSQL',
-  'Redis',       'Docker',       'AWS',           'WebSockets',
-  'TypeScript',  'React',        'Node.js',       'Python',
-  'Microservices','REST APIs',   'CI/CD',         'Nginx',
-  'Scalable',    'Resilient',    'Performant',    'Real-time',
-  'Idempotent',  'Distributed',  'Type-safe',     'Secure',
+  'Sublimation', 'Screen Print', 'DTF Print', 'Embroidery',
+  'CMYK Precision', 'Cotton Fabric', 'Coffee Mugs', 'Polo Shirts',
+  'Photo Frames', 'Mouse Pads', 'School Uniforms', 'Lanyards',
+  'ID Cards', 'Corporate Gifts', 'High Fidelity', 'Laser Engraved',
+  'Fast Delivery', 'Wholesale Pricing', 'No MOQ', 'Vibrant Colors',
 ];
 
-const LINE1 = 'Built to Scale.';
-const LINE2 = 'Engineered.';
+const LINE1 = 'Precision Printed.';
+const LINE2 = 'Built to Last.';
 
 // ─── Seeded pseudo-random — stable across SSR/CSR ─────────────────────────────
 function sr(seed: number) {
@@ -78,7 +77,8 @@ function CountUp({ target, suffix = '+', duration = 1600 }: { target: number; su
             setDisplay(Math.round(ease * target));
             if (t < 1) requestAnimationFrame(tick);
           };
-          requestAnimationFrame(tick);
+          const handle = requestAnimationFrame(tick);
+          return () => cancelAnimationFrame(handle);
         }
       },
       { threshold: 0.5 },
@@ -94,7 +94,7 @@ function CountUp({ target, suffix = '+', duration = 1600 }: { target: number; su
 export function Stack() {
   const sectionRef  = useRef<HTMLElement>(null);
   const charRefs    = useRef<(HTMLSpanElement | null)[]>([]);
-  const words       = useMemo(buildFloatWords, []);
+  const words       = useMemo(() => buildFloatWords(), []);
 
   // Mouse-repulsion on title chars
   useEffect(() => {
@@ -246,7 +246,7 @@ export function Stack() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
         >
-          Technologies
+          Capabilities
         </motion.p>
 
         {/* Line 1 — heavy, interactive */}
@@ -335,7 +335,7 @@ export function Stack() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.55, ease: EASE }}
         >
-          Production-grade systems built with<br />a modern, battle-tested stack.
+          Custom printed merchandise crafted with<br />state-of-the-art technology.
         </motion.p>
 
         {/* Stat row */}
@@ -353,9 +353,9 @@ export function Stack() {
           transition={{ duration: 0.6, delay: 0.7, ease: EASE }}
         >
           {[
-            { target: 5,  label: 'Years' },
-            { target: 50, label: 'Projects' },
-            { target: 12, label: 'Technologies' },
+            { target: 10, label: 'Years Exp', suffix: '+' },
+            { target: 10, label: 'Custom Prints', suffix: 'K+' },
+            { target: 12, label: 'Key Products', suffix: '' },
           ].map((stat, idx) => (
             <div key={idx} style={{ textAlign: 'center' }}>
               <div
@@ -368,7 +368,7 @@ export function Stack() {
                   lineHeight: 1,
                 }}
               >
-                <CountUp target={stat.target} duration={1600 + idx * 200} />
+                <CountUp target={stat.target} suffix={stat.suffix} duration={1600 + idx * 200} />
               </div>
               <div
                 style={{

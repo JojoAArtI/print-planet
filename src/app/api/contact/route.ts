@@ -1,21 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import fs from 'fs';
-import path from 'path';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-function readLogoB64(filename: string): string {
-  try {
-    const buf = fs.readFileSync(path.join(process.cwd(), 'public', 'logo', filename));
-    return `data:image/png;base64,${buf.toString('base64')}`;
-  } catch {
-    return '';
-  }
-}
-
-const LOGO_HORIZONTAL = readLogoB64('cybersage_horizontal.png');
-const LOGO_ICON = readLogoB64('cybersage_icon.png');
+const resend = new Resend(process.env.RESEND_API_KEY || 're_temp_key');
 
 function emailTemplate({ name, email, message }: { name: string; email: string; message: string }) {
   return `<!DOCTYPE html>
@@ -23,7 +9,7 @@ function emailTemplate({ name, email, message }: { name: string; email: string; 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>New Message — Abakwe Carrington</title>
+  <title>New Inquiry — Print Planet</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -43,16 +29,13 @@ function emailTemplate({ name, email, message }: { name: string; email: string; 
               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td>
-                    <img
-                      src="${LOGO_HORIZONTAL}"
-                      alt="Cybersage"
-                      width="140"
-                      style="display:block; height:auto;"
-                    />
+                    <span style="font-weight: 800; font-size: 20px; letter-spacing: -0.02em; color: #ffffff;">
+                      PRINT <span style="color: rgba(255,255,255,0.4); font-weight: 300;">PLANET</span>
+                    </span>
                   </td>
                   <td align="right">
                     <span style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.25); font-weight:500;">
-                      Portfolio Inquiry
+                      Customer Inquiry
                     </span>
                   </td>
                 </tr>
@@ -68,7 +51,7 @@ function emailTemplate({ name, email, message }: { name: string; email: string; 
               </p>
               <h1 style="font-size:36px; font-weight:700; color:#ffffff; letter-spacing:-0.03em; line-height:1.1; margin:0;">
                 You have a<br/>
-                <span style="color:rgba(255,255,255,0.35); font-weight:300; font-style:italic;">new inquiry</span>
+                <span style="color:rgba(255,255,255,0.35); font-weight:300; font-style:italic;">new print inquiry</span>
               </h1>
             </td>
           </tr>
@@ -100,7 +83,7 @@ function emailTemplate({ name, email, message }: { name: string; email: string; 
           <tr>
             <td style="padding-bottom: 40px;">
               <p style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.22); font-weight:500; margin-bottom:16px;">
-                Message
+                Message Details
               </p>
               <div style="border-left: 2px solid rgba(255,255,255,0.15); padding-left: 24px;">
                 <p style="font-size:15px; line-height:1.8; color:rgba(255,255,255,0.7); white-space:pre-line;">
@@ -132,16 +115,11 @@ function emailTemplate({ name, email, message }: { name: string; email: string; 
               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td>
-                    <img
-                      src="${LOGO_ICON}"
-                      alt=""
-                      width="28"
-                      style="display:block; height:auto; opacity:0.3;"
-                    />
+                    <span style="font-weight: 700; font-size: 13px; color: rgba(255,255,255,0.3);">PRINT PLANET</span>
                   </td>
                   <td align="right">
                     <p style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.18);">
-                      abakwecarrington@gmail.com
+                      onezero1solutions@gmail.com
                     </p>
                   </td>
                 </tr>
@@ -153,8 +131,8 @@ function emailTemplate({ name, email, message }: { name: string; email: string; 
           <tr>
             <td style="padding-top: 20px;">
               <p style="font-size:10px; letter-spacing:0.12em; color:rgba(255,255,255,0.12); line-height:1.8;">
-                This message was submitted via the contact form at cybersage.dev<br/>
-                © 2026 Abakwe Carrington · All rights reserved
+                This message was submitted via the contact form at printplanet.in<br/>
+                © 2026 Print Planet · All rights reserved
               </p>
             </td>
           </tr>
@@ -177,10 +155,10 @@ export async function POST(req: NextRequest) {
     }
 
     const { error } = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>',
-      to: 'abakwecarrington@gmail.com',
+      from: 'Print Planet Contact <onboarding@resend.dev>',
+      to: 'onezero1solutions@gmail.com',
       replyTo: email,
-      subject: `New message from ${name} — Portfolio`,
+      subject: `New inquiry from ${name} — Print Planet`,
       html: emailTemplate({ name, email, message }),
     });
 

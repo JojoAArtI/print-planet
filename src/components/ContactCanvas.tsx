@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -8,22 +8,22 @@ const COUNT   = 55;
 const THRESH2 = 3.6 * 3.6;
 const MAX_SEGS = COUNT * COUNT; // over-allocated max line segments
 
+const positions  = new Float32Array(COUNT * 3);
+const velocities = new Float32Array(COUNT * 3);
+const lineBuffer = new Float32Array(MAX_SEGS * 6);
+
+// Initialize coordinates once at file load
+for (let i = 0; i < COUNT; i++) {
+  positions[i * 3]      = (Math.random() - 0.5) * 24;
+  positions[i * 3 + 1]  = (Math.random() - 0.5) * 14;
+  positions[i * 3 + 2]  = (Math.random() - 0.5) * 2;
+  velocities[i * 3]     = (Math.random() - 0.5) * 0.006;
+  velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.006;
+}
+
 function Constellation() {
   const pointsRef = useRef<THREE.Points>(null!);
   const linesRef  = useRef<THREE.LineSegments>(null!);
-
-  const { positions, velocities, lineBuffer } = useMemo(() => {
-    const positions  = new Float32Array(COUNT * 3);
-    const velocities = new Float32Array(COUNT * 3);
-    for (let i = 0; i < COUNT; i++) {
-      positions[i * 3]      = (Math.random() - 0.5) * 24;
-      positions[i * 3 + 1]  = (Math.random() - 0.5) * 14;
-      positions[i * 3 + 2]  = (Math.random() - 0.5) * 2;
-      velocities[i * 3]     = (Math.random() - 0.5) * 0.006;
-      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.006;
-    }
-    return { positions, velocities, lineBuffer: new Float32Array(MAX_SEGS * 6) };
-  }, []);
 
   useFrame(() => {
     const pos = pointsRef.current?.geometry.attributes.position.array as Float32Array;

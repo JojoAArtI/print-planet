@@ -18,38 +18,38 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const SERVICES = [
   {
     index: '01',
-    title: 'Systems Architecture',
-    short: 'Design before code.',
-    body: 'Data models, service boundaries, API contracts, failure modes, and capacity planning — mapped before a line of production code. I deliver architectures teams can build on for years, with documentation that survives handover.',
-    keywords: ['System Design', 'Multi-Tenant', 'Event-Driven', 'Capacity Planning'],
+    title: 'Corporate Branding',
+    short: 'Sleek corporate identities.',
+    body: 'Custom employee uniforms, durable identification cards, printed lanyards, and custom corporate gift packages. We help brands align their physical presence with their premium values through matching, high-quality merchandise.',
+    keywords: ['Uniforms', 'ID Cards', 'Lanyards', 'Gift Packages'],
   },
   {
     index: '02',
-    title: 'Cloud Infrastructure & DevOps',
-    short: 'AWS · Docker · CI/CD.',
-    body: 'Container orchestration, GitHub Actions pipelines, zero-downtime deploys, environment management. I build infrastructure your team can actually understand — and rebuild from a single repo.',
-    keywords: ['AWS', 'Docker', 'GitHub Actions', 'Terraform'],
+    title: 'Promotional & Event Wear',
+    short: 'Make your campaigns memorable.',
+    body: 'Direct-to-Film and screen-printed garments for promotional events, sports teams, student cohorts, and festivals. Our high-fidelity prints remain vibrant through repeated wears and washes.',
+    keywords: ['Event Wear', 'Team Kits', 'Promo T-Shirts', 'Custom Sweatshirts'],
   },
   {
     index: '03',
-    title: 'Distributed Backends & APIs',
-    short: 'Services that survive traffic spikes.',
-    body: 'Rate-limiting, idempotency keys, circuit breakers, JWT auth, connection pooling, caching strategies. Go and Django services engineered to fail gracefully instead of cascading.',
-    keywords: ['Go', 'Django', 'Redis', 'REST', 'WebSockets'],
+    title: 'Personalized Giftware',
+    short: 'Make gifts meaningful.',
+    body: 'Custom-designed coffee mugs, insulated steel bottles, photo frames, and customized phone cases. We leverage sublimation and direct UV printing to achieve photorealistic designs for the perfect keepsake.',
+    keywords: ['Ceramic Mugs', 'Steel Bottles', 'Photo Frames', 'Mobile Covers'],
   },
   {
     index: '04',
-    title: 'Reliability & Performance',
-    short: "Find and fix what's slow.",
-    body: 'Database query analysis, p95 latency hunting, caching architecture review, Core Web Vitals improvement. I find bottlenecks and eliminate them with evidence.',
-    keywords: ['PostgreSQL', 'p95 Latency', 'Caching', 'Lighthouse'],
+    title: 'Bulk Fabric Printing',
+    short: 'Volume scaling with tier pricing.',
+    body: 'Automated screen printing, high-volume embroidery, and large-format Direct-to-Film transfers for retail store runs, school directories, and franchise employee apparel.',
+    keywords: ['Screen Printing', 'Embroidery', 'DTF Heat Transfers', 'Volume Discounts'],
   },
   {
     index: '05',
-    title: 'Full Stack Delivery',
-    short: 'When the system needs a face.',
-    body: 'Next.js front-ends, e-commerce with Stripe/Paystack, real-time dashboards — built on top of the architecture, not instead of it. From zero to production, end to end.',
-    keywords: ['Next.js', 'React', 'Stripe', 'PostgreSQL'],
+    title: 'Design Proofing & Layout',
+    short: 'Get it right before print.',
+    body: 'Professional vector correction, typography scaling, color matching, and digital layout verification. We provide clear, accurate digital mockups so you can sign off on files with 100% confidence.',
+    keywords: ['Vector Adjustment', 'Color Matching', 'Layout Verification', 'Digital Proofs'],
   },
 ];
 
@@ -122,7 +122,7 @@ function ServiceRow({
         onClick={onToggle}
         onMouseEnter={() => { setHovered(true); rawX.set(10); }}
         onMouseLeave={() => { setHovered(false); rawX.set(0); }}
-        className="w-full flex items-center justify-between py-6 lg:py-8 text-left pl-4 lg:pl-6"
+        className="w-full flex items-center justify-between py-6 lg:py-8 text-left pl-4 lg:pl-6 cursor-pointer"
       >
         {/* Content: index + title + short */}
         <motion.div
@@ -302,7 +302,7 @@ export function Services() {
             fontSize: 'clamp(2.8rem, 7vw, 8rem)',
           }}
         >
-          {(['What', 'I'] as const).map((word, i) => (
+          {(['What', 'We'] as const).map((word, i) => (
             <span key={word} className="inline-block overflow-hidden mr-[0.25em]">
               <motion.span
                 className="block"
@@ -328,7 +328,7 @@ export function Services() {
               animate={sectionInView ? { y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.28, ease: EASE }}
             >
-              Build
+              Print
             </motion.span>
           </span>
         </h2>

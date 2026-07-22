@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@_!∆';
 const EASE = [0.22, 1, 0.36, 1] as const;
-const STACK_TAGS = ['AWS', 'Docker', 'Go', 'PostgreSQL', 'Redis', 'Next.js'];
+const STACK_TAGS = ['Apparel', 'Drinkware', 'Photo Frames', 'Uniforms', 'Corporate Gifts', 'Accessories'];
 
 function runScramble(el: HTMLElement, duration = 900, delay = 0) {
   animate(el, {
@@ -124,10 +124,7 @@ export function Hero() {
         >
           <source src="/hero_arch_opt.mp4" type="video/mp4" />
         </video>
-        {/* Soft atmospheric scrim — purely tonal now, not load-bearing for legibility.
-            Text below is auto-inverting (mix-blend-mode: difference), so it reads
-            correctly whatever tone of the video it happens to sit over. This just
-            keeps the overall frame from feeling too flat/uniformly dark. */}
+        {/* Soft atmospheric scrim */}
         <div
           className="absolute inset-0"
           style={{
@@ -157,19 +154,19 @@ export function Hero() {
               className="inline-flex items-center gap-2 border px-3 py-1.5"
               style={{ borderColor: '#FFFFFF', mixBlendMode: 'difference' }}
             >
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#FFFFFF' }} />
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-emerald-400" />
               <span
                 className="text-[0.6rem] font-medium tracking-[0.2em] uppercase"
                 style={{ fontFamily: 'Satoshi, system-ui, sans-serif', color: '#FFFFFF' }}
               >
-                Available for Work
+                Orders Open
               </span>
             </span>
             <span
-              className="text-[0.6rem] font-medium tracking-[0.15em] uppercase"
+              className="text-[0.6rem] font-medium tracking-[0.15em] uppercase text-left"
               style={{ fontFamily: 'Satoshi, system-ui, sans-serif', color: '#D9D9D9', mixBlendMode: 'difference' }}
             >
-              Lagos, Nigeria · Remote Worldwide
+              Custom Apparel · Drinkware · Corporate Gifting
             </span>
           </motion.div>
 
@@ -185,11 +182,11 @@ export function Hero() {
               mixBlendMode: 'difference',
             }}
           >
-            <span ref={line1Ref} className="block cursor-default select-none">Abakwe</span>
-            <span ref={line2Ref} className="block cursor-default select-none">Carrington</span>
+            <span ref={line1Ref} className="block cursor-default select-none">Print</span>
+            <span ref={line2Ref} className="block cursor-default select-none">Planet</span>
           </h1>
 
-          {/* Italic serif tagline — auto-inverting like the name above it */}
+          {/* Italic serif tagline */}
           <p
             ref={subRef}
             className="mt-[clamp(1rem,2.5vw,2.5rem)] cursor-default select-none"
@@ -203,13 +200,13 @@ export function Hero() {
               mixBlendMode: 'difference',
             }}
           >
-            Infrastructure &amp; Systems Architect designing distributed platforms for regulated industries — from embedded edge to cloud.
+            Your Printing Destination — turning your memories and creative designs into premium custom reality.
           </p>
 
           {/* Bottom row: stack + CTA */}
           <div className="mt-[clamp(2rem,4vw,4.5rem)] flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8">
 
-            {/* Stack tags — staggered clip-path reveal */}
+            {/* Stack tags */}
             <div className="flex flex-wrap gap-2">
               {STACK_TAGS.map((tag, i) => (
                 <motion.span
@@ -233,15 +230,15 @@ export function Hero() {
             {/* CTAs */}
             <div className="flex items-center gap-4 shrink-0">
               <motion.a
-                href="#work"
+                href="/products"
                 data-cursor="view"
-                className="group flex items-center gap-2 bg-black text-white px-6 py-3.5 text-[0.7rem] font-medium tracking-[0.18em] uppercase hover:bg-black/80 transition-colors duration-200"
+                className="group flex items-center gap-2 bg-black text-white px-6 py-3.5 text-[0.7rem] font-medium tracking-[0.18em] uppercase hover:bg-black/80 transition-colors duration-200 no-underline"
                 style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 2.1, ease: EASE }}
               >
-                View Work
+                Browse Products
                 <ArrowDownRight
                   size={12}
                   className="group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform"
@@ -250,7 +247,7 @@ export function Hero() {
               <motion.button
                 data-cursor="hire"
                 onClick={() => window.dispatchEvent(new CustomEvent('open-contact-modal'))}
-                className="text-[0.7rem] font-medium tracking-[0.18em] uppercase border px-6 py-3.5 transition-opacity duration-200 hover:opacity-70"
+                className="text-[0.7rem] font-medium tracking-[0.18em] uppercase border px-6 py-3.5 transition-opacity duration-200 hover:opacity-70 cursor-pointer"
                 style={{
                   fontFamily: 'Satoshi, system-ui, sans-serif',
                   color: '#FFFFFF',
@@ -261,7 +258,7 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 2.2, ease: EASE }}
               >
-                Contact
+                Get Quote
               </motion.button>
             </div>
           </div>
@@ -295,7 +292,7 @@ export function Hero() {
           className="text-[0.55rem] tracking-[0.25em] uppercase [writing-mode:vertical-rl] rotate-180"
           style={{ fontFamily: 'Satoshi, system-ui, sans-serif', color: '#D9D9D9', mixBlendMode: 'difference' }}
         >
-          Systems · Cloud · Distributed · Remote
+          Apparel · Drinkware · Frames · Custom Merchandise
         </span>
       </div>
     </section>
