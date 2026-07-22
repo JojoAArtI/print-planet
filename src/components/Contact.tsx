@@ -4,12 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useInView, useMotionValue, useSpring } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
 import { ArrowUpRight, X } from 'lucide-react';
 import Link from 'next/link';
 import { ContactCanvas } from './ContactCanvas';
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger);
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -64,7 +63,7 @@ function MagneticCTA({
       onMouseLeave={() => { rawX.set(0); rawY.set(0); }}
       className={
         solid
-          ? 'group inline-flex items-center gap-3 bg-white text-black px-8 py-4 hover:bg-white/85 transition-colors duration-300 cursor-pointer'
+          ? 'group inline-flex items-center gap-3 bg-blue-600 text-white px-8 py-4 hover:bg-blue-700 transition-colors duration-300 cursor-pointer shadow-md shadow-blue-500/10'
           : 'group inline-flex items-center gap-3 border border-white/20 px-8 py-4 text-white/60 hover:text-white hover:border-white/50 transition-colors duration-300 cursor-pointer'
       }
       whileHover={!solid ? { backgroundColor: 'rgba(255,255,255,0.04)' } : undefined}
@@ -349,8 +348,6 @@ function ContactModal({ onClose }: { onClose: () => void }) {
 /* ── Main section ─────────────────────────────────────────────────────────── */
 export function Contact() {
   const sectionRef   = useRef<HTMLElement>(null);
-  const emailRef     = useRef<HTMLAnchorElement>(null);
-  const wordmarkRef  = useRef<HTMLSpanElement>(null);
   const sectionInView = useInView(sectionRef, { once: true, margin: '-12%' });
   const [modal, setModal] = useState<null | 'message'>(null);
 
@@ -360,102 +357,6 @@ export function Contact() {
     };
     window.addEventListener('open-contact-modal', handler);
     return () => window.removeEventListener('open-contact-modal', handler);
-  }, []);
-
-  /* ── PRINT PLANET wordmark animation ── */
-  useEffect(() => {
-    const el = wordmarkRef.current;
-    if (!el) return;
-
-    let glitchTimer: ReturnType<typeof setTimeout> | undefined;
-
-    const ctx = gsap.context(() => {
-      const split = new SplitText(el, { type: 'chars' });
-      const chars = split.chars as HTMLElement[];
-
-      gsap.set(chars, {
-        color: 'rgba(255,255,255,0)',
-        y: -40,
-        skewX: () => (Math.random() - 0.5) * 10,
-      });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start: 'top bottom',
-          toggleActions: 'play none none none',
-        },
-      });
-
-      /* 1 — fly in with a bright flash */
-      tl.to(chars, {
-        color: 'rgba(255,255,255,0.18)',
-        y: 0,
-        skewX: 0,
-        duration: 1.6,
-        stagger: { amount: 0.55, from: 'random' },
-        ease: 'expo.out',
-      });
-
-      /* 2 — settle to the original ghost opacity */
-      tl.to(chars, {
-        color: 'rgba(255,255,255,0.032)',
-        duration: 2,
-        stagger: { amount: 0.4 },
-        ease: 'power2.inOut',
-      }, '-=0.7');
-
-      /* 3 — continuous idle float */
-      chars.forEach((char, i) => {
-        gsap.to(char, {
-          y: `${2 + Math.sin(i * 0.9) * 3}px`,
-          duration: 3.5 + i * 0.2,
-          ease: 'sine.inOut',
-          yoyo: true,
-          repeat: -1,
-          delay: i * 0.09,
-        });
-      });
-
-      /* 4 — periodic glitch on a random character */
-      const scheduleGlitch = (delay = 4200) => {
-        glitchTimer = setTimeout(() => {
-          if (!chars.length) return;
-          const i = Math.floor(Math.random() * chars.length);
-          gsap.timeline()
-            .to(chars[i], { color: 'rgba(255,255,255,0.28)', x: 3, skewX: 7, duration: 0.055 })
-            .to(chars[i], { color: 'rgba(255,255,255,0.01)', x: -2, skewX: -5, duration: 0.055 })
-            .to(chars[i], { color: 'rgba(255,255,255,0.032)', x: 0, skewX: 0, duration: 0.1 });
-          scheduleGlitch(1500 + Math.random() * 3000);
-        }, delay);
-      };
-      scheduleGlitch();
-    }, el);
-
-    return () => {
-      clearTimeout(glitchTimer);
-      ctx.revert();
-    };
-  }, []);
-
-  /* ── Email SplitText animation ── */
-  useEffect(() => {
-    if (!sectionRef.current || !emailRef.current) return;
-    const ctx = gsap.context(() => {
-      const split = new SplitText(emailRef.current!, { type: 'chars' });
-      gsap.fromTo(
-        split.chars,
-        { y: 48, opacity: 0 },
-        {
-          y: 0, opacity: 1,
-          duration: 1.1,
-          stagger: 0.022,
-          ease: 'power4.out',
-          scrollTrigger: { trigger: emailRef.current, start: 'top 80%' },
-        }
-      );
-    }, sectionRef);
-    return () => ctx.revert();
   }, []);
 
   const openWhatsApp = () => {
@@ -468,7 +369,7 @@ export function Contact() {
         ref={sectionRef}
         id="contact"
         data-theme="dark"
-        className="w-full bg-[#0A0A0A] border-t border-white/6 relative overflow-hidden"
+        className="w-full bg-zinc-950 border-t border-blue-500/10 relative overflow-hidden"
       >
         {/* Constellation background */}
         <div className="absolute inset-0 pointer-events-none z-0" aria-hidden>
@@ -514,9 +415,8 @@ export function Contact() {
 
             <div className="overflow-hidden mb-8">
               <a
-                ref={emailRef}
                 href="mailto:onezero1solutions@gmail.com"
-                className="block font-black text-white tracking-[-0.04em] leading-[0.88] hover:text-white/45 transition-colors duration-300 will-change-transform"
+                className="block font-black text-zinc-50 tracking-[-0.04em] leading-[0.88] hover:text-blue-400 transition-colors duration-300 will-change-transform"
                 style={{
                   fontFamily: 'Satoshi, system-ui, sans-serif',
                   fontWeight: 800,
@@ -587,28 +487,6 @@ export function Contact() {
 
         {/* ── Footer ──────────────────────────────────────────────────────── */}
         <footer className="border-t border-white/6 mt-0 relative z-10 overflow-hidden">
-
-          {/* Big background wordmark */}
-          <div
-            aria-hidden
-            className="absolute bottom-0 left-0 right-0 pointer-events-none select-none flex justify-center items-end"
-          >
-            <span
-              ref={wordmarkRef}
-              style={{
-                fontFamily: 'Satoshi, system-ui, sans-serif',
-                fontWeight: 900,
-                fontSize: 'clamp(4.5rem, 18vw, 22rem)',
-                letterSpacing: '-0.02em',
-                color: 'rgba(255,255,255,0.022)',
-                lineHeight: 0.82,
-                whiteSpace: 'nowrap',
-                userSelect: 'none',
-              }}
-            >
-              PRINT PLANET
-            </span>
-          </div>
 
           <div className="relative z-10 max-w-[1440px] mx-auto px-[clamp(1.25rem,5vw,5rem)] py-[clamp(3rem,5vw,5rem)]">
 
