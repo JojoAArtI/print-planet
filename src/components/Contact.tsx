@@ -486,131 +486,130 @@ export function Contact() {
         </div>
 
         {/* ── Footer ──────────────────────────────────────────────────────── */}
-        <footer className="border-t border-white/6 mt-0 relative z-10 overflow-hidden">
-
-          <div className="relative z-10 max-w-[1440px] mx-auto px-[clamp(1.25rem,5vw,5rem)] py-[clamp(3rem,5vw,5rem)]">
-
-            {/* Top row: logo + socials */}
-            <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-6 sm:gap-8 mb-10 sm:mb-12">
-              {/* Logo */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={sectionInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.6, ease: EASE }}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-white font-extrabold text-xl tracking-tight">
-                    PRINT <span className="text-white/40 font-light">PLANET</span>
-                  </span>
-                </div>
-              </motion.div>
-
-              {/* Socials */}
-              <motion.div
-                className="flex items-center justify-center gap-3"
-                initial={{ opacity: 0 }}
-                animate={sectionInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.7, ease: EASE }}
-              >
-                {SOCIALS.map(({ label, href, svg }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="w-9 h-9 border border-white/12 flex items-center justify-center text-white/25 hover:text-white hover:border-white/35 transition-all duration-200 cursor-pointer"
-                  >
-                    {svg}
-                  </a>
-                ))}
-              </motion.div>
-            </div>
-
-            {/* Middle: nav links */}
-            <motion.div
-              className="grid grid-cols-3 sm:flex sm:flex-wrap gap-y-4 sm:gap-x-8 sm:gap-y-3 mb-10 sm:mb-12"
-              initial={{ opacity: 0 }}
-              animate={sectionInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.75, ease: EASE }}
-            >
-              {[
-                { label: 'About', href: '/about' },
-                { label: 'Products', href: '/products' },
-                { label: 'Gallery', href: '/gallery' },
-                { label: 'FAQ', href: '/#faq' },
-                { label: 'Reviews', href: '/#testimonials' },
-                { label: 'Contact', href: '/contact' },
-              ].map(({ label, href }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  className="text-[0.58rem] tracking-[0.2em] uppercase text-white/22 hover:text-white/60 transition-colors duration-200 font-medium text-center sm:text-left cursor-pointer"
-                  style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
-                >
-                  {label}
-                </Link>
-              ))}
-            </motion.div>
-
-            {/* Launch record badge */}
-            <motion.div
-              className="flex justify-center sm:justify-start mb-10 sm:mb-12"
-              initial={{ opacity: 0 }}
-              animate={sectionInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.8, ease: EASE }}
-            >
-              <div className="group inline-flex items-center gap-3 border border-white/10 px-4 py-3 hover:border-white/22 transition-all duration-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/50 group-hover:bg-emerald-400 shrink-0 transition-colors duration-300 animate-pulse" />
-                <div className="flex flex-col gap-[3px]">
-                  <span
-                    style={{
-                      fontFamily: 'Satoshi, system-ui, sans-serif',
-                      fontSize: '0.52rem',
-                      letterSpacing: '0.28em',
-                      textTransform: 'uppercase',
-                      color: 'rgba(255,255,255,0.35)',
-                      fontWeight: 600,
-                    }}
-                  >
-                    Established 2026
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: 'Satoshi, system-ui, sans-serif',
-                      fontSize: '0.44rem',
-                      letterSpacing: '0.18em',
-                      textTransform: 'uppercase',
-                      color: 'rgba(255,255,255,0.16)',
-                      fontWeight: 500,
-                    }}
-                  >
-                    Premium custom prints
-                  </span>
+        <footer className="border-t border-white/6 mt-0 relative z-10 overflow-hidden bg-zinc-950/80">
+          <div className="relative z-10 max-w-[1440px] mx-auto px-[clamp(1.25rem,5vw,5rem)] pt-16 pb-8">
+            
+            {/* 4-Column Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 text-left">
+              
+              {/* Column 1: Brand Info */}
+              <div className="space-y-4">
+                <span className="text-white font-extrabold text-xl tracking-tight block">
+                  PRINT <span className="text-blue-500 font-light">PLANET</span>
+                </span>
+                <p className="text-white/40 text-xs leading-relaxed max-w-xs">
+                  Your premier printing destination. We turn your creative visions and memories into high-resolution, long-lasting custom merchandise.
+                </p>
+                {/* Socials */}
+                <div className="flex items-center gap-2 pt-2">
+                  {SOCIALS.map(({ label, href, svg }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="w-8 h-8 border border-white/10 flex items-center justify-center text-white/30 hover:text-blue-400 hover:border-blue-400/50 transition-all duration-200 cursor-pointer"
+                    >
+                      {svg}
+                    </a>
+                  ))}
                 </div>
               </div>
-            </motion.div>
 
-            {/* Bottom bar */}
-            <motion.div
-              className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 border-t border-white/6 pt-8"
-              initial={{ opacity: 0 }}
-              animate={sectionInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.85, ease: EASE }}
-            >
+              {/* Column 2: Explore Catalog */}
+              <div>
+                <h4 className="text-[0.58rem] tracking-[0.2em] uppercase text-white/50 font-bold mb-4" style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}>
+                  Explore Catalog
+                </h4>
+                <ul className="space-y-2.5">
+                  {[
+                    { label: 'Custom Apparel', href: '/products' },
+                    { label: 'Insulated Bottles', href: '/products' },
+                    { label: 'Photo Mugs', href: '/products' },
+                    { label: 'Bespoke Frames', href: '/products' },
+                    { label: 'ID Cards & Merch', href: '/products' },
+                  ].map((link, i) => (
+                    <li key={i}>
+                      <Link
+                        href={link.href}
+                        className="text-xs text-white/35 hover:text-blue-400 transition-colors no-underline font-medium"
+                        style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Column 3: Resources */}
+              <div>
+                <h4 className="text-[0.58rem] tracking-[0.2em] uppercase text-white/50 font-bold mb-4" style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}>
+                  Resources
+                </h4>
+                <ul className="space-y-2.5">
+                  {[
+                    { label: 'About Us', href: '/about' },
+                    { label: 'Showcase Gallery', href: '/gallery' },
+                    { label: 'Quality Guarantee', href: '/about#quality' },
+                    { label: 'Frequently Asked', href: '/#faq' },
+                    { label: 'Request a Quote', href: '/contact' },
+                  ].map((link, i) => (
+                    <li key={i}>
+                      <Link
+                        href={link.href}
+                        className="text-xs text-white/35 hover:text-blue-400 transition-colors no-underline font-medium"
+                        style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Column 4: Office Info */}
+              <div className="space-y-3">
+                <h4 className="text-[0.58rem] tracking-[0.2em] uppercase text-white/50 font-bold mb-4" style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}>
+                  Office Coordinates
+                </h4>
+                <p className="text-xs text-white/40 leading-relaxed font-medium" style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}>
+                  Faridabad, Haryana · India
+                </p>
+                <p className="text-xs font-semibold">
+                  <a href="mailto:onezero1solutions@gmail.com" className="text-white/35 hover:text-blue-400 transition-colors no-underline">
+                    onezero1solutions@gmail.com
+                  </a>
+                </p>
+                <p className="text-xs font-semibold">
+                  <a href="https://wa.me/918292349048" target="_blank" rel="noopener noreferrer" className="text-white/35 hover:text-blue-400 transition-colors no-underline">
+                    +91 8292349048 (WhatsApp)
+                  </a>
+                </p>
+                <span className="inline-flex items-center gap-1.5 bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 text-[0.52rem] font-bold tracking-wider uppercase mt-1">
+                  <span className="w-1 h-1 rounded-full bg-blue-400 animate-pulse" /> Established 2026
+                </span>
+              </div>
+
+            </div>
+
+            {/* Bottom Copyright Bar */}
+            <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-4 border-t border-white/6 pt-8 text-center sm:text-left">
               <p
-                className="text-[0.55rem] tracking-[0.16em] uppercase text-white/18 font-medium text-center sm:text-left"
+                className="text-[0.55rem] tracking-[0.16em] uppercase text-white/20 font-medium"
                 style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
               >
-                © 2026 Print Planet. All rights reserved. Premium custom printing services.
+                © 2026 Print Planet. All rights reserved. Custom Printing Services.
               </p>
               <p
-                className="text-[0.55rem] tracking-[0.14em] uppercase text-white/12 text-center sm:text-right"
+                className="text-[0.55rem] tracking-[0.14em] uppercase text-white/12"
                 style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
               >
                 Designed &amp; Developed for Print Planet
               </p>
-            </motion.div>
+            </div>
+
           </div>  {/* end z-10 wrapper */}
         </footer>
       </section>
