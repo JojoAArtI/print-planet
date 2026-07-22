@@ -1,299 +1,192 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowDownRight } from 'lucide-react';
-import { animate, createTimeline, scrambleText } from 'animejs';
+import { ArrowDownRight, CheckCircle } from 'lucide-react';
+import Link from 'next/link';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@_!∆';
 const EASE = [0.22, 1, 0.36, 1] as const;
 const STACK_TAGS = ['Apparel', 'Drinkware', 'Photo Frames', 'Uniforms', 'Corporate Gifts', 'Accessories'];
 
-function runScramble(el: HTMLElement, duration = 900, delay = 0) {
-  animate(el, {
-    innerHTML: scrambleText({
-      chars: SCRAMBLE_CHARS,
-      duration,
-      delay,
-      perturbation: 0.18,
-      cursor: '█▓▒░',
-      settleDuration: 280,
-    }),
-  });
-}
-
 export function Hero() {
-  const containerRef = useRef<HTMLElement>(null);
-  const nameRef = useRef<HTMLHeadingElement>(null);
-  const line1Ref = useRef<HTMLSpanElement>(null);
-  const line2Ref = useRef<HTMLSpanElement>(null);
-  const subRef = useRef<HTMLParagraphElement>(null);
-
-  useEffect(() => {
-    // ── Scramble entrance ──────────────────────────────────────────────────────
-    const tl = createTimeline({ delay: 180 });
-
-    if (line1Ref.current && line2Ref.current && subRef.current) {
-      tl.add(line1Ref.current, {
-        innerHTML: scrambleText({
-          chars: SCRAMBLE_CHARS,
-          duration: 820,
-          perturbation: 0.22,
-          cursor: '█▓▒░',
-          settleDuration: 260,
-        }),
-      });
-      tl.add(line2Ref.current, {
-        innerHTML: scrambleText({
-          chars: SCRAMBLE_CHARS,
-          duration: 820,
-          perturbation: 0.22,
-          cursor: '█▓▒░',
-          settleDuration: 260,
-        }),
-      }, '-=680');
-      tl.add(subRef.current, {
-        innerHTML: scrambleText({
-          chars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz —',
-          duration: 700,
-          perturbation: 0.15,
-          cursor: '░▒',
-          settleDuration: 200,
-        }),
-      }, '-=500');
-    }
-
-    // ── GSAP: scroll shrink name ───────────────────────────────────────────────
-    const ctx = gsap.context(() => {
-      if (nameRef.current) {
-        gsap.to(nameRef.current, {
-          scale: 0.92,
-          opacity: 0.4,
-          y: -40,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.5,
-          },
-        });
-      }
-    }, containerRef);
-
-    // ── Hover replay ───────────────────────────────────────────────────────────
-    const hoverTargets: [HTMLElement | null, number][] = [
-      [line1Ref.current, 700],
-      [line2Ref.current, 700],
-      [subRef.current, 600],
-    ];
-    const cleanups: (() => void)[] = [];
-    hoverTargets.forEach(([el, dur]) => {
-      if (!el) return;
-      const handler = () => runScramble(el, dur);
-      el.addEventListener('pointerenter', handler);
-      cleanups.push(() => el.removeEventListener('pointerenter', handler));
-    });
-
-    return () => {
-      ctx.revert();
-      cleanups.forEach((fn) => fn());
-    };
-  }, []);
-
   return (
     <section
-      ref={containerRef}
-      className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col"
+      className="relative w-full min-h-screen bg-zinc-50 overflow-hidden flex items-center pt-24 pb-16"
       style={{ isolation: 'isolate' }}
     >
-      {/* Video background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster="/hero_arch_poster.jpg"
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/hero_arch_opt.mp4" type="video/mp4" />
-        </video>
-        {/* Soft atmospheric scrim */}
+      {/* Soft atmospheric gradient orbs */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Blue Orb */}
         <div
-          className="absolute inset-0"
+          className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full opacity-[0.12] blur-[120px]"
           style={{
-            background:
-              'radial-gradient(ellipse 80% 72% at 20% 100%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0) 78%)',
+            background: 'radial-gradient(circle, #3B82F6 0%, transparent 80%)',
+          }}
+        />
+        {/* Coral/Indigo Orb */}
+        <div
+          className="absolute bottom-[5%] right-[-5%] w-[45vw] h-[45vw] rounded-full opacity-[0.08] blur-[100px]"
+          style={{
+            background: 'radial-gradient(circle, #F43F5E 0%, transparent 80%)',
           }}
         />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col flex-1 w-full pl-[clamp(1rem,4vw,5rem)] pr-[clamp(1rem,8vw,14rem)]">
-
-        {/* Top bar nav spacer */}
-        <div className="pt-22" />
-
-        {/* Main content — grows to fill */}
-        <div className="flex flex-col flex-1 justify-end pb-[clamp(2.5rem,6vw,6rem)]">
-
-          {/* Status pill */}
-          <motion.div
-            className="flex items-center gap-3 mb-[clamp(1.5rem,3vw,3rem)]"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 1.4, ease: EASE }}
-          >
-            <span
-              className="inline-flex items-center gap-2 border px-3 py-1.5"
-              style={{ borderColor: '#FFFFFF', mixBlendMode: 'difference' }}
+      <div className="relative z-10 max-w-[1440px] mx-auto px-[clamp(1.25rem,5vw,5rem)] w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center">
+          
+          {/* LEFT COLUMN: Clean text copy */}
+          <div className="flex flex-col">
+            {/* Status Pill */}
+            <motion.div
+              className="inline-flex items-center gap-2 border border-blue-500/15 bg-blue-500/[0.03] px-3.5 py-1.5 self-start mb-6"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: EASE }}
             >
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-emerald-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
               <span
-                className="text-[0.6rem] font-medium tracking-[0.2em] uppercase"
-                style={{ fontFamily: 'Satoshi, system-ui, sans-serif', color: '#FFFFFF' }}
+                className="text-[0.62rem] font-bold tracking-[0.18em] uppercase text-blue-600"
+                style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
               >
-                Orders Open
+                Accepting Orders
               </span>
-            </span>
-            <span
-              className="text-[0.6rem] font-medium tracking-[0.15em] uppercase text-left"
-              style={{ fontFamily: 'Satoshi, system-ui, sans-serif', color: '#D9D9D9', mixBlendMode: 'difference' }}
+            </motion.div>
+
+            {/* Main Headline */}
+            <motion.h1
+              className="font-black leading-[0.95] tracking-tight text-zinc-950"
+              style={{
+                fontFamily: 'Satoshi, system-ui, sans-serif',
+                fontSize: 'clamp(2.8rem, 6.2vw, 5.8rem)',
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
             >
-              Custom Apparel · Drinkware · Corporate Gifting
-            </span>
-          </motion.div>
+              Premium Custom Printing &{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+                Merchandise
+              </span>
+            </motion.h1>
 
-          {/* H1 — massive display name */}
-          <h1
-            ref={nameRef}
-            className="font-black leading-[0.88] tracking-tighter will-change-transform"
-            style={{
-              fontFamily: 'Satoshi, system-ui, sans-serif',
-              fontWeight: 800,
-              fontSize: 'clamp(3.8rem, 11.5vw, 14rem)',
-              color: '#FFFFFF',
-              mixBlendMode: 'difference',
-            }}
-          >
-            <span ref={line1Ref} className="block cursor-default select-none">Print</span>
-            <span ref={line2Ref} className="block cursor-default select-none">Planet</span>
-          </h1>
+            {/* Tagline */}
+            <motion.p
+              className="mt-6 text-zinc-600 text-lg sm:text-xl font-medium leading-relaxed max-w-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.25, ease: EASE }}
+            >
+              We turn your creative ideas and cherished memories into reality. From high-quality custom apparel to personalized corporate gift kits, we handle every print run with uncompromised precision.
+            </motion.p>
 
-          {/* Italic serif tagline */}
-          <p
-            ref={subRef}
-            className="mt-[clamp(1rem,2.5vw,2.5rem)] cursor-default select-none"
-            style={{
-              fontFamily: 'var(--font-instrument), Georgia, serif',
-              fontStyle: 'italic',
-              fontSize: 'clamp(1.25rem, 3vw, 3rem)',
-              letterSpacing: '-0.01em',
-              lineHeight: 1.25,
-              color: '#D9D9D9',
-              mixBlendMode: 'difference',
-            }}
-          >
-            Your Printing Destination — turning your memories and creative designs into premium custom reality.
-          </p>
-
-          {/* Bottom row: stack + CTA */}
-          <div className="mt-[clamp(2rem,4vw,4.5rem)] flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8">
-
-            {/* Stack tags */}
-            <div className="flex flex-wrap gap-2">
-              {STACK_TAGS.map((tag, i) => (
-                <motion.span
+            {/* Category Tags */}
+            <motion.div
+              className="flex flex-wrap gap-2 mt-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              {STACK_TAGS.map((tag) => (
+                <span
                   key={tag}
-                  className="border px-3 py-1 text-[0.65rem] font-medium tracking-[0.12em] uppercase"
-                  style={{
-                    fontFamily: 'Satoshi, system-ui, sans-serif',
-                    color: '#D9D9D9',
-                    borderColor: '#D9D9D9',
-                    mixBlendMode: 'difference',
-                  }}
-                  initial={{ opacity: 0, y: 10, clipPath: 'inset(100% 0 0 0)' }}
-                  animate={{ opacity: 1, y: 0, clipPath: 'inset(0% 0 0 0)' }}
-                  transition={{ duration: 0.5, delay: 1.6 + i * 0.07, ease: EASE }}
+                  className="bg-white border border-zinc-200 px-3 py-1.5 text-[0.65rem] font-bold tracking-[0.12em] uppercase text-zinc-500 rounded-none shadow-xs"
+                  style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
                 >
                   {tag}
-                </motion.span>
+                </span>
               ))}
-            </div>
+            </motion.div>
 
-            {/* CTAs */}
-            <div className="flex items-center gap-4 shrink-0">
-              <motion.a
+            {/* Action Buttons */}
+            <motion.div
+              className="flex items-center gap-4 mt-10"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.45, ease: EASE }}
+            >
+              <Link
                 href="/products"
-                data-cursor="view"
-                className="group flex items-center gap-2 bg-black text-white px-6 py-3.5 text-[0.7rem] font-medium tracking-[0.18em] uppercase hover:bg-black/80 transition-colors duration-200 no-underline"
+                className="group flex items-center gap-2 bg-blue-600 text-white px-7 py-4 text-[0.68rem] font-bold tracking-[0.18em] uppercase hover:bg-blue-700 transition-colors duration-200 no-underline shadow-md shadow-blue-500/10"
                 style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 2.1, ease: EASE }}
               >
-                Browse Products
+                Browse Catalog
                 <ArrowDownRight
                   size={12}
                   className="group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform"
                 />
-              </motion.a>
-              <motion.button
-                data-cursor="hire"
+              </Link>
+              <button
                 onClick={() => window.dispatchEvent(new CustomEvent('open-contact-modal'))}
-                className="text-[0.7rem] font-medium tracking-[0.18em] uppercase border px-6 py-3.5 transition-opacity duration-200 hover:opacity-70 cursor-pointer"
-                style={{
-                  fontFamily: 'Satoshi, system-ui, sans-serif',
-                  color: '#FFFFFF',
-                  borderColor: '#FFFFFF',
-                  mixBlendMode: 'difference',
-                }}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 2.2, ease: EASE }}
+                className="text-[0.68rem] font-bold tracking-[0.18em] uppercase border border-zinc-300 bg-white text-zinc-700 px-7 py-4 hover:bg-zinc-50 transition-colors duration-200 cursor-pointer shadow-xs"
+                style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}
               >
-                Get Quote
-              </motion.button>
-            </div>
+                Get Custom Quote
+              </button>
+            </motion.div>
           </div>
-        </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.5, duration: 0.8 }}
-        >
+          {/* RIGHT COLUMN: Clean graphical mock card */}
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-px h-12 bg-linear-to-b from-white/70 to-transparent"
-            style={{ mixBlendMode: 'difference' }}
-          />
-          <span
-            className="text-[0.55rem] tracking-[0.22em] uppercase"
-            style={{ fontFamily: 'Satoshi, system-ui, sans-serif', color: '#D9D9D9', mixBlendMode: 'difference' }}
+            className="relative flex items-center justify-center lg:justify-end"
+            initial={{ opacity: 0, scale: 0.96, x: 20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
           >
-            Scroll
-          </span>
-        </motion.div>
-      </div>
+            {/* Outline Card Mock */}
+            <div className="w-full max-w-md border border-zinc-200/80 bg-white p-8 shadow-xl shadow-zinc-200/50 relative flex flex-col justify-between aspect-[5/4]">
+              {/* Top Accent */}
+              <div className="absolute top-0 right-0 pointer-events-none">
+                <div className="absolute top-0 right-0 w-px h-8 bg-blue-500/20" />
+                <div className="absolute top-0 right-0 w-8 h-px bg-blue-500/20" />
+              </div>
 
-      {/* Side label — desktop */}
-      <div className="absolute right-[clamp(1rem,2vw,2.5rem)] top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-3 z-10">
-        <span
-          className="text-[0.55rem] tracking-[0.25em] uppercase [writing-mode:vertical-rl] rotate-180"
-          style={{ fontFamily: 'Satoshi, system-ui, sans-serif', color: '#D9D9D9', mixBlendMode: 'difference' }}
-        >
-          Apparel · Drinkware · Frames · Custom Merchandise
-        </span>
+              <div>
+                <div className="flex justify-between items-center mb-6">
+                  <span className="text-[0.55rem] tracking-[0.2em] uppercase text-zinc-400 font-bold">
+                    Featured Collection
+                  </span>
+                  <span className="flex items-center gap-1.5 text-emerald-600 text-[0.55rem] font-bold tracking-wider uppercase bg-emerald-50 border border-emerald-200 px-2 py-0.5">
+                    <CheckCircle size={10} /> Verified
+                  </span>
+                </div>
+                
+                <h3 className="font-extrabold text-2xl text-zinc-900 tracking-tight mb-2" style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}>
+                  Signature Team Sweaters
+                </h3>
+                <p className="text-zinc-500 text-sm leading-relaxed mb-6">
+                  Engineered with premium fleece fabrics and crack-resistant high-density prints for ultimate daily durability.
+                </p>
+
+                {/* SVG Visual Print representation */}
+                <div className="border border-zinc-100 bg-zinc-50/50 rounded-xs h-28 flex items-center justify-center relative overflow-hidden">
+                  <svg className="w-16 h-16 text-blue-500/8" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M20 30 L35 20 L50 28 L65 20 L80 30 L75 80 L25 80 Z" fill="url(#gradHero)" />
+                    <circle cx="50" cy="50" r="10" stroke="currentColor" strokeWidth="1" />
+                    <defs>
+                      <linearGradient id="gradHero" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.1" />
+                        <stop offset="100%" stopColor="#4f46e5" stopOpacity="0.2" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div className="absolute bottom-2 right-3 text-[0.48rem] tracking-widest text-zinc-400 font-bold uppercase">
+                    360 GSM Fleece
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-zinc-100 pt-4 flex items-center justify-between mt-6">
+                <span className="text-[0.55rem] tracking-[0.16em] uppercase text-zinc-400 font-bold">
+                  Print Method: DTF Transfer
+                </span>
+                <span className="text-[0.55rem] tracking-[0.16em] uppercase text-indigo-600 font-extrabold">
+                  MOQ: 1 Item
+                </span>
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
